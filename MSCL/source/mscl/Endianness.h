@@ -9,7 +9,11 @@
 #include "stdafx.h"
 
 DISABLE_WARNING_BOOST_START
+#if BOOST_VERSION < 106900
+#include <boost/detail/endian.hpp>
+#else
 #include <boost/predef/other/endian.h>
+#endif
 DISABLE_WARNING_BOOST_END
 
 #include <algorithm>
@@ -87,7 +91,7 @@ template<typename StaticType>
 inline StaticType SystemEndian_To_LittleEndian(StaticType val);
 
 
-#ifdef BOOST_ENDIAN_LITTLE_BYTE
+#if defined(BOOST_ENDIAN_LITTLE_BYTE) || defined(BOOST_LITTLE_ENDIAN)
 // Little endian system
 
 template<typename StaticType>
