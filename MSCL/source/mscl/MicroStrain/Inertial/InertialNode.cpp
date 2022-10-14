@@ -1355,6 +1355,6 @@ namespace mscl
         params.insert(params.begin(), Value::BOOL(suppressAckNack));
 
         // send command
-        m_impl->run(MipTypes::CMD_NMEA_MESSAGE_FORMAT, params, !suppressAckNack);
+        m_impl->run(MipTypes::CMD_POLL_NMEA_MESSAGE, params, !suppressAckNack);
     }
 }
