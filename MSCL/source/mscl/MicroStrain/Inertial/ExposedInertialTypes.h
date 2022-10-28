@@ -871,7 +871,10 @@ namespace mscl
     public:
         //API Constructor: NmeaMessageFormat
         //  Creates a NmeaMessageFormat object.
-        NmeaMessageFormat() {}
+        NmeaMessageFormat() :
+            m_talkerId(Talker::IGNORED),
+            m_decimation(0)
+        {}
 
         //API Destructor: NmeaMessageFormat
         //  Destructor for NmeaMessageFormat object.
