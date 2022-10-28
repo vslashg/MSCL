@@ -335,6 +335,13 @@ namespace mscl
         //    A <GpioPinOptions> map of supported GPIO pin configurations
         const GpioPinOptions supportedGpioConfigurations() const;
 
+        //API Function: supportedGnssSignalConfigurations
+        //    Gets bitmask vectors of supported <GnssSignalConfiguration> for each constellation
+        //
+        //Returns:
+        //    Bitmask vectors of supported <GnssSignalConfiguration> for each constellation
+        GnssSignalConfigOptions supportedGnssSignalConfigurations() const;
+
         //API Function: supportedDeclinationOptions
         //    Gets a vector of supported declination source options
         //
@@ -384,5 +391,12 @@ namespace mscl
         //Returns:
         //    True if north compensation is supported by the Node, false otherwise.
         const bool supportsNorthCompensation() const;
+
+        //API Function: supportedLowPassFilterChannelFields
+        //    Gets the list of <MipTypes::ChannelFields> that the low-pass filter can be applied to for this device.
+        //
+        //Returns:
+        //    <MipTypes::MipChannelFields> - list of supported <MipTypes::ChannelFields>.
+        MipTypes::MipChannelFields supportedLowPassFilterChannelFields() const;
     };
 }

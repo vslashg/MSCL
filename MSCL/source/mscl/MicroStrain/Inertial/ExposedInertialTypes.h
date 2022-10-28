@@ -264,7 +264,7 @@ namespace mscl
         };
 
         //============================================================================================================
-        //API Enum: FilterState 
+        //API Enum: FilterState
         //    The Filter States with the NAV Filter Status field
         //    Refer to device documentation for supported filter states.
         //
@@ -288,7 +288,7 @@ namespace mscl
             FILTERSTATE_AHRS               = 0x03,
             FILTERSTATE_FULL_NAV           = 0x04
         };
-        
+
         //============================================================================================================
         //API Enum: FilterStatus_Running
         //    Binary flags that give information with the NAV Filter Status field when filter is initialized and running. Each bit must be checked accordingly.
@@ -811,34 +811,34 @@ namespace mscl
         //  VTG     - 0x05 - Course over Ground
         //  HDT     - 0x06 - Heading, True
         //  ZDA     - 0x07 - Time & Date
-        //  PRKA    - 0x81 - Parker proprietary Euler angles
-        //  PRKR    - 0x82 - Parker proprietary Angular Rate/Acceleration
+        //  PKRA    - 0x81 - Parker proprietary Euler angles
+        //  PKRR    - 0x82 - Parker proprietary Angular Rate/Acceleration
         enum SentenceType
         {
-            GGA = 0x01,
-            GLL = 0x02,
-            GSV = 0x03,
-            RMC = 0x04,
-            VTG = 0x05,
-            HDT = 0x06,
-            ZDA = 0x07,
-            PRKA = 0x81,
-            PRKR = 0x82
+            GGA  = 0x01,
+            GLL  = 0x02,
+            GSV  = 0x03,
+            RMC  = 0x04,
+            VTG  = 0x05,
+            HDT  = 0x06,
+            ZDA  = 0x07,
+            PKRA = 0x81,
+            PKRR = 0x82
         };
 
         //API Enum: Talker
         //  NMEA talker ID options
         //
-        //  NOT_APPLICABLE  - 0 - Talker ID not applicable
+        //  IGNORED         - 0 - Talker ID cannot be configured for the given sentence type
         //  GNSS            - 1 - NMEA message will be produced with talker id "GN"
         //  GPS             - 2 - NMEA message will be produced with talker id "GP"
         //  GALILEO         - 3 - NMEA message will be produced with talker id "GA"
         //  GLONASS         - 4 - NMEA message will be produced with talker id "GL"
         enum Talker
         {
-            NOT_APPLICABLE = 0,
-            GNSS = 1,
-            GPS = 2,
+            IGNORED = 0,
+            GNSS    = 1,
+            GPS     = 2,
             GALILEO = 3,
             GLONASS = 4
         };
@@ -858,7 +858,7 @@ namespace mscl
 
         //Variable: m_sourceDescSet
         //  The source descriptor set.
-        MipTypes::DataClass m_descSet;
+        MipTypes::DataClass m_sourceDescSet;
 
         //Variable: m_baseRate
         //  Descriptor set base rate, updated with m_descSet
@@ -869,46 +869,81 @@ namespace mscl
         uint16 m_decimation = 1;
 
     public:
-        NmeaMessageFormat() {};
-        ~NmeaMessageFormat() {};
+        //API Constructor: NmeaMessageFormat
+        //  Creates a NmeaMessageFormat object.
+        NmeaMessageFormat() {}
+
+        //API Destructor: NmeaMessageFormat
+        //  Destructor for NmeaMessageFormat object.
+        ~NmeaMessageFormat() {}
 
     public:
         //API Function: sentenceType
-        //  Gets/sets the NMEA <SentenceType> type.
-        SentenceType sentenceType() const { return m_sentenceType; };
+        //  Sets the NMEA <SentenceType>.
+        //
+        //Parameters:
+        //  type - <SentenceType> for this NMEA message configuration
         void sentenceType(SentenceType type);
 
+        //API Function: sentenceType
+        //  Gets the NMEA <SentenceType>.
+        //
+        //Returns:
+        //  <SentenceType> - the sentence type of this NMEA message configuration
+        SentenceType sentenceType() const { return m_sentenceType; }
+
         //API Function: talkerId
-        //  Gets/sets the NMEA <Talker> ID.
-        Talker talkerId() const { return m_talkerId; };
+        //  Sets the NMEA <Talker> ID.
+        //
+        //Parameters:
+        //  id - Talker ID for this NMEA message configuration
         void talkerId(Talker id);
 
+        //API Function: talkerId
+        //  Gets the NMEA <Talker> ID.
+        //
+        //Returns:
+        //  <Talker> - the talker ID for this NMEA message configuration
+        Talker talkerId() const { return m_talkerId; }
+
         //API Function: sourceDataClass
-        //  Gets/sets the source <MipTypes::DataClass>
+        //  Sets the source <MipTypes::DataClass>
         //
         //  Note: if the previously set sampleRate is no longer valid, it will be updated to the closest valid sample rate.
         //
         //Parameters:
-        //  dataClass (set only) - the <MipTypes::DataClass> source
-        //  baseRate (set only) - the base rate of the specified data class. This can be read from InertialNode::getDataRateBase()
-        MipTypes::DataClass sourceDataClass() const { return m_descSet; };
+        //  dataClass - the <MipTypes::DataClass> source
+        //  baseRate - the base rate of the specified data class. This can be read from <InertialNode::getDataRateBase>.
         void sourceDataClass(MipTypes::DataClass dataClass, uint16 baseRate = 0);
 
+        //API Function: sourceDataClass
+        //  Gets the source <MipTypes::DataClass>
+        //
+        //Returns:
+        //  <MipTypes::DataClass> - the source data class for this NMEA message configuration
+        MipTypes::DataClass sourceDataClass() const { return m_sourceDescSet; }
+
         //API Function: sampleRate
-        //  Gets/sets the output sample rate. If baseRate is not specified, please use a <SampleRate> with RateType of decimation (SampleRate::Decimation(rateDecimation)) otherwise it will cannot be properly interpretted.
+        //  Sets the output sample rate. If baseRate is not specified, please use a <SampleRate> with RateType of decimation (SampleRate::Decimation(rateDecimation)) otherwise it will cannot be properly interpretted.
         //
         //  Note: the sample rate is limited to either the data class base rate or MAX_FREQUENCY (10 Hz), whichever is lower. If input is too high, it will be automatically reduced to the max value.
         //  Sample rate can only be validated if base rate is specified.
         //
         //Parameters:
-        //  rate (set only) - the <SampleRate> at which to output
-        //  baseRate (set only) - the base rate of the specified data class. This can be read from InertialNode::getDataRateBase()
-        SampleRate sampleRate() const;
+        //  rate - the <SampleRate> at which to output
+        //  baseRate - the base rate of the specified data class. This can be read from <InertialNode::getDataRateBase>.
         void sampleRate(SampleRate rate, uint16 baseRate = 0);
 
+        //API Function: sampleRate
+        //  Gets the configured output <SampleRate>
+        //
+        //Returns:
+        //  <SampleRate> - the output sample rate for this NMEA message configuration
+        SampleRate sampleRate() const;
+
     private:
-        //Function: updateSampleRate
-        // Update the decimation based on current data class and previous, new base rates.
+        //Function: updateDecimation
+        //  Update the decimation based on current data class and previous, new base rates.
         void updateDecimation(uint16 newBaseRate);
 
     public:
@@ -927,7 +962,7 @@ namespace mscl
         static std::vector<MipTypes::DataClass> supportedDataClasses(SentenceType sentenceType);
 
     private:
-        friend InertialNode;
+        friend class InertialNode;
 
         //Function: fromCommandResponse
         //  [static] Build <NmeaMessageFormat> objects from the read command response <MipFieldValues>.
@@ -939,7 +974,7 @@ namespace mscl
 
         //Function: baseRate
         //  Set base rate directly (usually done through sourceDataClass or sampleRate).
-        void baseRate(uint16 base) { m_baseRate = base; };
+        void baseRate(uint16 base) { m_baseRate = base; }
 
         //Function: toCommandParameters
         //  Generates command parameter MipFieldValues for single NmeaMessageFormat object.
@@ -1120,7 +1155,7 @@ namespace mscl
         //    The <PositionVelocityReferenceFrame> of this vector.
         //    Default: ECEF
         PositionVelocityReferenceFrame referenceFrame;
-        
+
         //API Function: x
         // Only valid if referenceFrame is ECEF
         float x() const { return vec_0; }
@@ -1176,7 +1211,7 @@ namespace mscl
         //    long_init - initial longitude
         //    alt_init - initial altitude
         static Position PositionLLH(double lat_init, double long_init, double alt_init) { return Position(lat_init, long_init, alt_init, PositionVelocityReferenceFrame::LLH_NED); }
-        
+
         //API Constructor: Position
         //    Creates a Position object with the reference frame set to ECEF
         //
@@ -1365,7 +1400,7 @@ namespace mscl
         //API Variable: applyIntegrityInfo
         bool applyIntegrityInfo;
 
-        //API Variable: SatellitePRNs 
+        //API Variable: SatellitePRNs
         //  The <SatellitePRNs> for all included satellites.
         SatellitePRNs satellitePRNs;
 
@@ -1420,9 +1455,9 @@ namespace mscl
         Constellations constellations;
     };
 
-    //API Struct: AdvancedLowPassFilterData
-    //    Contains the data for the <InertialNode::setAdvancedLowPassFilterSettings> API call.
-    struct AdvancedLowPassFilterData
+    //API Struct: LowPassFilterData
+    //    Contains the data for the <InertialNode::setLowPassFilterSettings> API call.
+    struct LowPassFilterData
     {
         //API Enum: ManualFilterBandwidthConfig
         //    The enum for the different data descriptors.
@@ -1435,16 +1470,16 @@ namespace mscl
             USER_SPECIFIED_CUTOFF_FREQ = 0x01
         };
 
-        // API Constructor: AdvancedLowPassFilterData
-        AdvancedLowPassFilterData() :
+        // API Constructor: LowPassFilterData
+        LowPassFilterData() :
             dataDescriptor(mscl::MipTypes::ChannelField::CH_FIELD_SENSOR_SCALED_ACCEL_VEC),
             manualFilterBandwidthConfig(SET_TO_HALF_REPORTING_RATE),
             applyLowPassFilter(true),
             cutoffFrequency(0)
         { }
 
-        // API Constructor: AdvancedLowPassFilterData
-        AdvancedLowPassFilterData(mscl::MipTypes::ChannelField descriptor) :
+        // API Constructor: LowPassFilterData
+        LowPassFilterData(mscl::MipTypes::ChannelField descriptor) :
             dataDescriptor(descriptor),
             manualFilterBandwidthConfig(SET_TO_HALF_REPORTING_RATE),
             applyLowPassFilter(true),
@@ -1454,11 +1489,16 @@ namespace mscl
         //API Variable: dataDescriptor
         //    the data descriptor these settings apply to
         //
-        //  Valid values:
-        //  CH_FIELD_SENSOR_SCALED_ACCEL_VEC = 0x8004
-        //  CH_FIELD_SENSOR_SCALED_GYRO_VEC = 0x8005
-        //  CH_FIELD_SENSOR_SCALED_MAG_VEC = 0x8006
-        //  CH_FIELD_SENSOR_SCALED_AMBIENT_PRESSURE = 0x8017
+        //  Valid values (depending on device support):
+        //
+        //  CH_FIELD_SENSOR_SCALED_ACCEL_VEC            = 0x8004
+        //  CH_FIELD_SENSOR_SCALED_GYRO_VEC             = 0x8005
+        //  CH_FIELD_SENSOR_SCALED_MAG_VEC              = 0x8006
+        //  CH_FIELD_SENSOR_SCALED_AMBIENT_PRESSURE     = 0x8017
+        //
+        //  CH_FIELD_ESTFILTER_ESTIMATED_LINEAR_ACCEL   = 0x820D
+        //  CH_FIELD_ESTFILTER_ESTIMATED_ANGULAR_RATE   = 0x820E
+        //  CH_FIELD_ESTFILTER_COMPENSATED_ACCEL        = 0x821C
         mscl::MipTypes::ChannelField dataDescriptor;
 
         //API Variable: manualFilterBandwidthConfig
@@ -1471,7 +1511,7 @@ namespace mscl
 
         //API Variable: cutoffFrequency
         //    Sets the cutoff frequency, only if manualFilterBandwidthConfig == USER_SPECIFIED_CUTOFF_FREQ
-        uint16 cutoffFrequency;
+        float cutoffFrequency;
 
     public:
         //API Function: getDataDescriptorForCommand
@@ -1495,9 +1535,9 @@ namespace mscl
         static mscl::MipTypes::ChannelField getDataDescriptorFromUint8(uint8 descriptor) { return static_cast<mscl::MipTypes::ChannelField>(descriptor | 0x8000); }
     };
 
-    //API Typedef: AdvancedLowPassFilterConfig
-    //  A vector of <AdvancedLowPassFilterData> objects
-    typedef std::vector<AdvancedLowPassFilterData> AdvancedLowPassFilterConfig;
+    //API Typedef: LowPassFilterConfig
+    //  A vector of <LowPassFilterData> objects
+    typedef std::vector<LowPassFilterData> LowPassFilterConfig;
 
     //API Struct: ComplementaryFilterData
     //    Contains the data needed by the <InertialNode::setComplementaryFilterSettings> class.
@@ -1963,7 +2003,7 @@ namespace mscl
         boost::optional<uint16> m_accelRange;
     };
 
-    
+
 
     //API Typedef: StatusSelectors
     //  A vector of <StatusSelector> objects
@@ -2101,7 +2141,7 @@ namespace mscl
         HeadingAlignmentMethod(uint8 val) :
             value(val)
         {}
-        
+
         //API Variable: value
         //  The HeadingAlignmentMethod bitfield value
         uint8 value;
@@ -2178,7 +2218,7 @@ namespace mscl
 
         //API Variable: referenceFrame
         PositionVelocityReferenceFrame referenceFrame;
-        
+
         //API Function: manualHeading
         //    Checks the value of initialValuesSource to determine if the initial heading needs to be set manually.
         bool manualHeading()
@@ -2311,7 +2351,7 @@ namespace mscl
     struct HeadingData
     {
     public:
-        HeadingData () : 
+        HeadingData () :
             heading (TRUE_HEADING),
             headingAngle(0),
             headingAngleUncertainty(0)
@@ -2350,7 +2390,7 @@ namespace mscl
 
         //API Variable: mode
         InertialTypes::AdaptiveMeasurementMode mode;
-        
+
         //API Variable: lowPassFilterCutoff
         float lowPassFilterCutoff;
 
@@ -2495,7 +2535,7 @@ namespace mscl
         //    Checks whether the specified option is enabled.
         bool optionEnabled(MeasurementOptions option) { return (measurementOptions & static_cast<uint16>(option)) > 0; };
         bool optionEnabled(uint16 options) { return (measurementOptions & options) > 0; };
-        
+
         //API Function: enableOption
         //    Enables the specified option.
         void enableOption(MeasurementOptions option) { measurementOptions = measurementOptions | static_cast<uint16>(option); }
@@ -2577,7 +2617,7 @@ namespace mscl
             CONNECTION_4G = 0x04,
             CONNECTION_5G = 0x05,
         };
-        
+
         //Constructor: RTKDeviceStatusFlags
         RTKDeviceStatusFlags() {}
 
@@ -2595,7 +2635,7 @@ namespace mscl
 #endif
         //API Function: version
         uint8 version() const;
-        
+
         //API Function: modemState
         ModemState modemState() const;
         void modemState(ModemState state);
@@ -2636,7 +2676,7 @@ namespace mscl
         uint8 correctionsUnavailable() const;
         void correctionsUnavailable(uint8 unavailable);
     };
-    
+
     //API Struct: RTKDeviceStatusFlags_v1
     class RTKDeviceStatusFlags_v1 : public Bitfield
     {
@@ -2799,8 +2839,9 @@ namespace mscl
     public:
         //API Enum: GpsSignal
         //  Available GPS signals.
-        //      L1CA    - 0x01 - L1CA:  00000001
-        //      L2C     - 0x02 - L2C:   00000010
+        //
+        //      L1CA - 0x01 - L1CA: 00000001
+        //      L2C  - 0x02 - L2C:  00000010
         enum GpsSignal
         {
             L1CA = 0x01,
@@ -2809,8 +2850,9 @@ namespace mscl
 
         //API Enum: GlonassSignal
         //  Available GLONASS signals.
-        //      L1OF    - 0x01 - L1OF:  00000001
-        //      L2OF    - 0x02 - L2OF:  00000010
+        //
+        //      L1OF - 0x01 - L1OF: 00000001
+        //      L2OF - 0x02 - L2OF: 00000010
         enum GlonassSignal
         {
             L1OF = 0x01,
@@ -2819,8 +2861,9 @@ namespace mscl
 
         //API Enum: GalileoSignal
         //  Available Galileo signals.
-        //      E1  - 0x01 - E1:   00000001
-        //      E5B - 0x02 - E5B:  00000010
+        //
+        //      E1  - 0x01 - E1:  00000001
+        //      E5B - 0x02 - E5B: 00000010
         enum GalileoSignal
         {
             E1  = 0x01,
@@ -2829,8 +2872,9 @@ namespace mscl
 
         //API Enum: BeiDouSignal
         //  Available BeiDou signals.
-        //      B1  - 0x01 - B1:    00000001
-        //      B2  - 0x02 - B2:    00000010
+        //
+        //      B1 - 0x01 - B1: 00000001
+        //      B2 - 0x02 - B2: 00000010
         enum BeiDouSignal
         {
             B1 = 0x01,
@@ -2900,6 +2944,8 @@ namespace mscl
         void beidouSignalValue(uint8 val) { m_beidouSignals.value(val); };
         uint8 beidouSignalValue() { return static_cast<uint8>(m_beidouSignals.value()); };
     };
+
+    typedef std::map<MipChannelIdentifier::GnssConstellationIds, std::vector<uint8>> GnssSignalConfigOptions;
 
     //API Struct: PositionReferenceConfiguration
     struct PositionReferenceConfiguration
