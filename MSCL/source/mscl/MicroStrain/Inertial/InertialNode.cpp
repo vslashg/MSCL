@@ -1361,7 +1361,7 @@ namespace mscl
 
     void InertialNode::pollNmea(NmeaMessageFormats nmeaFormats, bool suppressAckNack) const
     {
-        const MipFieldValues params = NmeaMessageFormat::toCommandParameters(nmeaFormats);
+        MipFieldValues params = NmeaMessageFormat::toCommandParameters(nmeaFormats);
 
         // insert suppress response flag as first param
         params.insert(params.begin(), Value::BOOL(suppressAckNack));
