@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("hdt",["Enumeration"],[["HDT",,[["NmeaMessageFormat",,,,0,"File:MicroStrain/Inertial/ExposedInertialTypes.h:NmeaMessageFormat.HDT","CClass:NmeaMessageFormat:HDT"]]]]);

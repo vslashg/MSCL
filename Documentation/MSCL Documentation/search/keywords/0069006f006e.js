@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("ion",["Constant"],[["IONOSPHERIC_CORRECTION_VALID",,[["FieldParser_GnssSBASCorrection",,,,0,"File:MicroStrain/Inertial/Packets/InertialFieldParser_GNSS.h:FieldParser_GnssSBASCorrection.IONOSPHERIC_CORRECTION_VALID","CClass:FieldParser_GnssSBASCorrection:IONOSPHERIC_CORRECTION_VALID"]]]]);

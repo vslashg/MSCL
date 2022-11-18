@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("CClass:ContinuousBIT","ContinuousBIT");NDSummary.OnSummaryLoaded("CClass:ContinuousBIT",[["C/C++","C"]],[["Classes","Class"],["Functions","Function"],["Groups","Group"]],[[4133,0,0,"ContinuousBIT"],[4134,0,2,"Functions","Functions"],[4135,0,1,"as_MipDataPoints","as_MipDataPoints"],[4136,0,1,"getMipDataPoints","getMipDataPoints"]]);

@@ -1,1 +1,1 @@
-NDSearch.OnPrefixDataLoaded("spe",["Function"],[["specifier",,[["MipChannelIdentifier",,,,0,"File:MicroStrain/MIP/MipTypes.h:MipChannelIdentifier.specifier","CClass:MipChannelIdentifier:specifier"]]]]);
+NDSearch.OnPrefixDataLoaded("spe",["Function","Enumeration"],[["specifier",,[["MipChannelIdentifier",,,,0,"File:MicroStrain/MIP/MipTypes.h:MipChannelIdentifier.specifier","CClass:MipChannelIdentifier:specifier"]]],["SPEED",,[["MipChannelIdentifier",,,,1,"File:MicroStrain/MIP/MipTypes.h:MipChannelIdentifier.SPEED","CClass:MipChannelIdentifier:SPEED"]]]]);
