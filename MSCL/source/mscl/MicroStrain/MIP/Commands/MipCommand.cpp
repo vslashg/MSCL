@@ -47,6 +47,9 @@ namespace mscl
             case valueType_uint32:
                 command.append_uint32(val.as_uint32());
                 break;
+            case valueType_uint64:
+                command.append_uint64(val.as_uint64());
+                break;
             case valueType_int8:
                 command.append_int8(val.as_int8());
                 break;
@@ -113,17 +116,20 @@ namespace mscl
         // 0x01
         case MipTypes::CMD_COMM_PORT_SPEED:
         // 0x0C
+        case MipTypes::CMD_NMEA_MESSAGE_FORMAT:
         case MipTypes::CMD_MESSAGE_FORMAT:
         case MipTypes::CMD_CONTINUOUS_DATA_STREAM:
         case MipTypes::CMD_PPS_SOURCE:
         case MipTypes::CMD_EVENT_CONTROL:
         case MipTypes::CMD_EVENT_TRIGGER_CONFIGURATION:
+        case MipTypes::CMD_EVENT_ACTION_CONFIGURATION:
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_TRANSFORM_EULER:
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_TRANSFORM_QUAT:
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_TRANSFORM_DCM:
         case MipTypes::CMD_GPIO_CONFIGURATION:
         case MipTypes::CMD_ODOMETER_SETTINGS:
         case MipTypes::CMD_SENSOR_RANGE:
+        case MipTypes::CMD_LOWPASS_ANTIALIASING_FILTER:
         // 0x0D
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_ROTATION_DCM:
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_ROTATION_QUAT:
@@ -131,6 +137,7 @@ namespace mscl
         case MipTypes::CMD_EF_ADAPTIVE_FILTER_OPTIONS:
         case MipTypes::CMD_EF_MULTI_ANTENNA_OFFSET:
         case MipTypes::CMD_EF_RELATIVE_POSITION_REF:
+        case MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF:
         case MipTypes::CMD_EF_SPEED_MEASUREMENT_OFFSET:
         case MipTypes::CMD_EF_VERTICAL_GYRO_CONSTRAINT:
         case MipTypes::CMD_EF_WHEELED_VEHICLE_CONSTRAINT:
@@ -179,12 +186,18 @@ namespace mscl
 
         switch (m_commandId)
         {
+            // 0x0C
         case MipTypes::CMD_CONTINUOUS_DATA_STREAM:
         case MipTypes::CMD_GET_BASE_RATE:
         case MipTypes::CMD_MESSAGE_FORMAT:
         case MipTypes::CMD_EVENT_CONTROL:
+        case MipTypes::CMD_EVENT_TRIGGER_CONFIGURATION:
+        case MipTypes::CMD_EVENT_ACTION_CONFIGURATION:
         case MipTypes::CMD_SENSOR_RANGE:
         case MipTypes::CMD_SUPPORTED_SENSOR_RANGES:
+        case MipTypes::CMD_LOWPASS_ANTIALIASING_FILTER:
+            // 0x0D
+        case MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF:
             // check that the identifier is echoed back in the response
             matchData.emplace(0, m_data[0]);
             break;
@@ -204,18 +217,18 @@ namespace mscl
         case MipTypes::CMD_COMM_PORT_SPEED:
             return "CommPortSpeed";
         // 0x0C
+        case MipTypes::CMD_NMEA_MESSAGE_FORMAT:
+            return "NmeaMessageFormat";
+        case MipTypes::CMD_POLL:
+            return "PollData";
         case MipTypes::CMD_GET_BASE_RATE:
             return "GetDataBaseRate";
         case MipTypes::CMD_MESSAGE_FORMAT:
             return "MessageFormat";
-        case MipTypes::CMD_POLL:
-            return "PollData";
         case MipTypes::CMD_FACTORY_STREAMING:
             return "FactoryStreaming";
         case MipTypes::CMD_CONTINUOUS_DATA_STREAM:
             return "ContinuousDataStream";
-        case MipTypes::CMD_EVENT_TRIGGER_CONFIGURATION:
-            return "EventTriggerConfiguration";
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_TRANSFORM_EULER:
             return "SensorToVehicleFrameTransformationEulerAngles";
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_TRANSFORM_QUAT:
@@ -230,6 +243,12 @@ namespace mscl
             return "EventControl";
         case MipTypes::CMD_EVENT_TRIGGER_STATUS:
             return "EventTriggerStatus";
+        case MipTypes::CMD_EVENT_ACTION_STATUS:
+            return "EventActionStatus";
+        case MipTypes::CMD_EVENT_TRIGGER_CONFIGURATION:
+            return "EventTriggerConfiguration";
+        case MipTypes::CMD_EVENT_ACTION_CONFIGURATION:
+            return "EventActionConfiguration";
         case MipTypes::CMD_GPIO_CONFIGURATION:
             return "GpioConfiguration";
         case MipTypes::CMD_GPIO_STATE:
@@ -240,6 +259,8 @@ namespace mscl
             return "SensorRange";
         case MipTypes::CMD_SUPPORTED_SENSOR_RANGES:
             return "SupportedSensorRanges";
+        case MipTypes::CMD_LOWPASS_ANTIALIASING_FILTER:
+            return "LowPassAntiAliasingFilter";
         // 0x0D
         case MipTypes::CMD_EF_RUN_FILTER:
             return "RunEstimationFilter";
@@ -255,6 +276,8 @@ namespace mscl
             return "MultiAntennaOffset";
         case MipTypes::CMD_EF_RELATIVE_POSITION_REF:
             return "RelativePositionReference";
+        case MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF:
+            return "LeverArmOffsetReference";
         case MipTypes::CMD_EF_EXTERN_SPEED_UPDATE:
             return "ExternalSpeedMeasurementUpdate";
         case MipTypes::CMD_EF_SPEED_MEASUREMENT_OFFSET:
@@ -291,8 +314,12 @@ namespace mscl
             return 0xB5;
         case MipTypes::CMD_EVENT_TRIGGER_STATUS:
             return 0xB6;
+        case MipTypes::CMD_EVENT_ACTION_STATUS:
+            return 0xB7;
         case MipTypes::CMD_EVENT_TRIGGER_CONFIGURATION:
             return 0xB8;
+        case MipTypes::CMD_EVENT_ACTION_CONFIGURATION:
+            return 0xB9;
         // 0x0D
         case MipTypes::CMD_EF_SENS_VEHIC_FRAME_ROTATION_DCM:
             return 0xBE;
@@ -302,6 +329,7 @@ namespace mscl
         // 0x01
         case MipTypes::CMD_COMM_PORT_SPEED: //0x89
         // 0x0C
+        case MipTypes::CMD_NMEA_MESSAGE_FORMAT: //0x8C
         case MipTypes::CMD_GET_BASE_RATE: //0x8E
         case MipTypes::CMD_MESSAGE_FORMAT: //0x8F
         case MipTypes::CMD_PPS_SOURCE: //0xA8
@@ -313,11 +341,13 @@ namespace mscl
         case MipTypes::CMD_ODOMETER_SETTINGS: //0xC3
         case MipTypes::CMD_SENSOR_RANGE: //0xD2
         case MipTypes::CMD_SUPPORTED_SENSOR_RANGES: //0xD3
+        case MipTypes::CMD_LOWPASS_ANTIALIASING_FILTER: //0xD4
         // 0x0D
         case MipTypes::CMD_EF_AIDING_MEASUREMENT_ENABLE: //0xD0
         case MipTypes::CMD_EF_ADAPTIVE_FILTER_OPTIONS: //0xD3
         case MipTypes::CMD_EF_MULTI_ANTENNA_OFFSET: //0xD4
         case MipTypes::CMD_EF_RELATIVE_POSITION_REF: //0xD5
+        case MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF: //0xD6
         case MipTypes::CMD_EF_SPEED_MEASUREMENT_OFFSET: //0xE1
         case MipTypes::CMD_EF_VERTICAL_GYRO_CONSTRAINT: //0xE2
         case MipTypes::CMD_EF_WHEELED_VEHICLE_CONSTRAINT: //0xE3
@@ -356,6 +386,12 @@ namespace mscl
 
 
         // 0x0C
+        case MipTypes::CMD_NMEA_MESSAGE_FORMAT:
+            return{
+                ValueType::valueType_uint8,
+                ValueType::valueType_Vector
+            };
+
         case MipTypes::CMD_GET_BASE_RATE:
             return{
                 ValueType::valueType_uint8,
@@ -398,6 +434,12 @@ namespace mscl
                 ValueType::valueType_Vector // status info
             };
 
+        case MipTypes::CMD_EVENT_ACTION_STATUS:
+            return{
+                ValueType::valueType_uint8, // count
+                ValueType::valueType_Vector // status info
+            };
+
         case MipTypes::CMD_ODOMETER_SETTINGS:
             return{
                 ValueType::valueType_uint8, // mode
@@ -416,6 +458,14 @@ namespace mscl
                 ValueType::valueType_uint8,
                 ValueType::valueType_uint8,
                 ValueType::valueType_Vector
+            };
+
+        case MipTypes::CMD_LOWPASS_ANTIALIASING_FILTER:
+            return{
+                ValueType::valueType_uint16,
+                ValueType::valueType_bool,
+                ValueType::valueType_bool,
+                ValueType::valueType_float,
             };
 
         case MipTypes::CMD_GPIO_CONFIGURATION:
@@ -461,6 +511,14 @@ namespace mscl
                 ValueType::valueType_double,
                 ValueType::valueType_double,
                 ValueType::valueType_double
+            };
+
+        case MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF:
+            return{
+                ValueType::valueType_uint8,
+                ValueType::valueType_float,
+                ValueType::valueType_float,
+                ValueType::valueType_float,
             };
 
         case MipTypes::CMD_EF_SPEED_MEASUREMENT_OFFSET:
@@ -557,6 +615,14 @@ namespace mscl
     {
         switch (id)
         {
+        case MipTypes::CMD_NMEA_MESSAGE_FORMAT:
+            return{
+                ValueType::valueType_uint8,
+                ValueType::valueType_uint8,
+                ValueType::valueType_uint8,
+                ValueType::valueType_uint16
+            };
+
         case MipTypes::CMD_MESSAGE_FORMAT:
             return{
                 ValueType::valueType_uint8,
@@ -577,6 +643,12 @@ namespace mscl
             };
 
         case MipTypes::CMD_EVENT_TRIGGER_STATUS:
+            return{
+                ValueType::valueType_uint8, // type
+                ValueType::valueType_uint8  // status
+            };
+
+        case MipTypes::CMD_EVENT_ACTION_STATUS:
             return{
                 ValueType::valueType_uint8, // type
                 ValueType::valueType_uint8  // status
@@ -621,6 +693,9 @@ namespace mscl
                 break;
             case valueType_uint32:
                 outData.push_back(Value::UINT32(buffer.read_uint32()));
+                break;
+            case valueType_uint64:
+                outData.push_back(Value::UINT64(buffer.read_uint64()));
                 break;
             case valueType_int8:
                 outData.push_back(Value::INT8(buffer.read_int8()));

@@ -463,13 +463,13 @@ public class InertialNode : MipNode {
     return ret;
   }
 
-  public void setAdvancedLowPassFilterSettings(AdvancedLowPassFilterConfig data) {
-    msclPINVOKE.InertialNode_setAdvancedLowPassFilterSettings(swigCPtr, AdvancedLowPassFilterConfig.getCPtr(data));
+  public void setLowPassFilterSettings(LowPassFilterConfig data) {
+    msclPINVOKE.InertialNode_setLowPassFilterSettings(swigCPtr, LowPassFilterConfig.getCPtr(data));
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public AdvancedLowPassFilterConfig getAdvancedLowPassFilterSettings(MipChannelFields dataDescriptors) {
-    AdvancedLowPassFilterConfig ret = new AdvancedLowPassFilterConfig(msclPINVOKE.InertialNode_getAdvancedLowPassFilterSettings(swigCPtr, MipChannelFields.getCPtr(dataDescriptors)), true);
+  public LowPassFilterConfig getLowPassFilterSettings(MipChannelFields dataDescriptors) {
+    LowPassFilterConfig ret = new LowPassFilterConfig(msclPINVOKE.InertialNode_getLowPassFilterSettings(swigCPtr, MipChannelFields.getCPtr(dataDescriptors)), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
@@ -923,6 +923,22 @@ public class InertialNode : MipNode {
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
   }
 
+  public EventActionConfiguration getEventActionConfig(byte instance) {
+    EventActionConfiguration ret = new EventActionConfiguration(msclPINVOKE.InertialNode_getEventActionConfig(swigCPtr, instance), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void setEventActionConfig(EventActionConfiguration config, bool validateSupported) {
+    msclPINVOKE.InertialNode_setEventActionConfig__SWIG_0(swigCPtr, EventActionConfiguration.getCPtr(config), validateSupported);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public void setEventActionConfig(EventActionConfiguration config) {
+    msclPINVOKE.InertialNode_setEventActionConfig__SWIG_1(swigCPtr, EventActionConfiguration.getCPtr(config));
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+  }
+
   public AntennaLeverArmCalConfiguration getAntennaLeverArmCal() {
     AntennaLeverArmCalConfiguration ret = new AntennaLeverArmCalConfiguration(msclPINVOKE.InertialNode_getAntennaLeverArmCal(swigCPtr), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
@@ -942,6 +958,17 @@ public class InertialNode : MipNode {
 
   public void setRelativePositionReference(PositionReferenceConfiguration ref_) {
     msclPINVOKE.InertialNode_setRelativePositionReference(swigCPtr, PositionReferenceConfiguration.getCPtr(ref_));
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+  }
+
+  public PositionOffset getLeverArmReferenceOffset() {
+    PositionOffset ret = new PositionOffset(msclPINVOKE.InertialNode_getLeverArmReferenceOffset(swigCPtr), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void setLeverArmReferenceOffset(PositionOffset offset) {
+    msclPINVOKE.InertialNode_setLeverArmReferenceOffset(swigCPtr, PositionOffset.getCPtr(offset));
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
   }
 
@@ -993,6 +1020,29 @@ public class InertialNode : MipNode {
     EventTriggerStatus ret = new EventTriggerStatus(msclPINVOKE.InertialNode_getEventTriggerStatus__SWIG_1(swigCPtr), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
     return ret;
+  }
+
+  public EventActionStatus getEventActionStatus(Bytes instances) {
+    EventActionStatus ret = new EventActionStatus(msclPINVOKE.InertialNode_getEventActionStatus__SWIG_0(swigCPtr, Bytes.getCPtr(instances)), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public EventActionStatus getEventActionStatus() {
+    EventActionStatus ret = new EventActionStatus(msclPINVOKE.InertialNode_getEventActionStatus__SWIG_1(swigCPtr), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public NmeaMessageFormats getNmeaMessageFormat() {
+    NmeaMessageFormats ret = new NmeaMessageFormats(msclPINVOKE.InertialNode_getNmeaMessageFormat(swigCPtr), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public void setNmeaMessageFormat(NmeaMessageFormats nmeaFormats) {
+    msclPINVOKE.InertialNode_setNmeaMessageFormat(swigCPtr, NmeaMessageFormats.getCPtr(nmeaFormats));
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
   }
 
 }

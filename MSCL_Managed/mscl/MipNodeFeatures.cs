@@ -81,7 +81,13 @@ public class MipNodeFeatures : global::System.IDisposable {
   }
 
   public MipChannelFields supportedChannelFields(MipTypes.DataClass dataClass) {
-    MipChannelFields ret = new MipChannelFields(msclPINVOKE.MipNodeFeatures_supportedChannelFields(swigCPtr, (int)dataClass), true);
+    MipChannelFields ret = new MipChannelFields(msclPINVOKE.MipNodeFeatures_supportedChannelFields__SWIG_0(swigCPtr, (int)dataClass), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public MipChannelFields supportedChannelFields() {
+    MipChannelFields ret = new MipChannelFields(msclPINVOKE.MipNodeFeatures_supportedChannelFields__SWIG_1(swigCPtr), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
@@ -92,8 +98,20 @@ public class MipNodeFeatures : global::System.IDisposable {
     return ret;
   }
 
+  public ushort baseDataRate(MipTypes.DataClass dataClass) {
+    ushort ret = msclPINVOKE.MipNodeFeatures_baseDataRate(swigCPtr, (int)dataClass);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public GnssReceivers gnssReceiverInfo() {
     GnssReceivers ret = new GnssReceivers(msclPINVOKE.MipNodeFeatures_gnssReceiverInfo(swigCPtr), false);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public GnssSources supportedGnssSources() {
+    GnssSources ret = new GnssSources(msclPINVOKE.MipNodeFeatures_supportedGnssSources(swigCPtr), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
@@ -194,6 +212,12 @@ public class MipNodeFeatures : global::System.IDisposable {
     return ret;
   }
 
+  public GnssSignalConfigOptions supportedGnssSignalConfigurations() {
+    GnssSignalConfigOptions ret = new GnssSignalConfigOptions(msclPINVOKE.MipNodeFeatures_supportedGnssSignalConfigurations(swigCPtr), true);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
   public GeographicSources supportedDeclinationSources() {
     GeographicSources ret = new GeographicSources(msclPINVOKE.MipNodeFeatures_supportedDeclinationSources(swigCPtr), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
@@ -232,6 +256,12 @@ public class MipNodeFeatures : global::System.IDisposable {
 
   public bool supportsNorthCompensation() {
     bool ret = msclPINVOKE.MipNodeFeatures_supportsNorthCompensation(swigCPtr);
+    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
+  }
+
+  public MipChannelFields supportedLowPassFilterChannelFields() {
+    MipChannelFields ret = new MipChannelFields(msclPINVOKE.MipNodeFeatures_supportedLowPassFilterChannelFields(swigCPtr), true);
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }

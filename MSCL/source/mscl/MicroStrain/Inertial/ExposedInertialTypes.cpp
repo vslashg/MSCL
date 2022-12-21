@@ -14,6 +14,176 @@ DISABLE_WARNING_BOOST_END
 
 namespace mscl
 {
+    //////////  NmeaMessageFormat  //////////
+    const SampleRate NmeaMessageFormat::MAX_FREQUENCY = SampleRate::Hertz(10);
+
+    void NmeaMessageFormat::sentenceType(const NmeaMessageFormat::SentenceType type)
+    {
+        m_sentenceType = type;
+    }
+
+    void NmeaMessageFormat::talkerId(const NmeaMessageFormat::Talker id)
+    {
+        m_talkerId = id;
+    }
+
+    void NmeaMessageFormat::sourceDataClass(const MipTypes::DataClass dataClass, const uint16 baseRate)
+    {
+        m_sourceDescSet = dataClass;
+        updateDecimation(baseRate);
+    }
+
+    SampleRate NmeaMessageFormat::sampleRate() const
+    {
+        return SampleRate::FromInertialRateDecimationInfo(m_baseRate, m_decimation);
+    }
+
+    void NmeaMessageFormat::sampleRate(const SampleRate rate, const uint16 baseRate)
+    {
+        m_baseRate = baseRate == 0 ? m_baseRate : baseRate;
+
+        if (m_baseRate == 0)
+        {
+            m_decimation = static_cast<uint16>(rate.samples());
+            return;
+        }
+
+        // if rate type is decimation, use base rate to determine absolute sample rate for comparison
+        const SampleRate absRate = rate.rateType() == SampleRate::rateType_decimation
+            ? SampleRate::FromInertialRateDecimationInfo(m_baseRate, static_cast<uint16>(rate.samples()))
+            : rate;
+
+        const SampleRate baseSampleRate = SampleRate::Hertz(m_baseRate);
+        const SampleRate& maxRate = baseSampleRate < MAX_FREQUENCY
+            ? baseSampleRate
+            : MAX_FREQUENCY;
+
+        const SampleRate& actualRate = absRate <= maxRate
+            ? absRate
+            : maxRate;
+
+        m_decimation = actualRate.toDecimation(m_baseRate);
+    }
+
+    void NmeaMessageFormat::updateDecimation(const uint16 newBaseRate)
+    {
+        // calculate sample rate based on current values
+        const SampleRate currentRate = SampleRate::FromInertialRateDecimationInfo(m_baseRate, m_decimation);
+        
+        // update decimation based on current sample rate and new base rate
+        m_baseRate = newBaseRate;
+        sampleRate(currentRate);
+    }
+
+    bool NmeaMessageFormat::talkerIdRequired(const SentenceType sentenceType)
+    {
+        switch (sentenceType)
+        {
+        case SentenceType::GSV:
+        case SentenceType::PKRA:
+        case SentenceType::PKRR:
+            return false;
+
+        default:
+            return true;
+        }
+    }
+
+    bool NmeaMessageFormat::dataClassSupported(const MipTypes::DataClass dataClass, const NmeaMessageFormat::SentenceType sentenceType)
+    {
+        std::vector<MipTypes::DataClass> supported = NmeaMessageFormat::supportedDataClasses(sentenceType);
+        return std::find(supported.begin(), supported.end(), dataClass) != supported.end();
+    }
+
+    MipTypes::MipDataClasses NmeaMessageFormat::supportedDataClasses(const NmeaMessageFormat::SentenceType sentenceType)
+    {
+        switch (sentenceType)
+        {
+        case SentenceType::GGA:
+        case SentenceType::GLL:
+        case SentenceType::RMC:
+        case SentenceType::VTG:
+        case SentenceType::HDT:
+            return{
+                MipTypes::DataClass::CLASS_ESTFILTER,
+                MipTypes::DataClass::CLASS_GNSS1,
+                MipTypes::DataClass::CLASS_GNSS2
+            };
+
+        case SentenceType::GSV:
+        case SentenceType::ZDA:
+            return{
+                MipTypes::DataClass::CLASS_GNSS1,
+                MipTypes::DataClass::CLASS_GNSS2
+            };
+
+        case SentenceType::PKRA:
+            return{
+                MipTypes::DataClass::CLASS_ESTFILTER
+            };
+
+        case SentenceType::PKRR:
+            return{
+                MipTypes::DataClass::CLASS_AHRS_IMU
+            };
+
+        default:
+            return{
+                MipTypes::DataClass::CLASS_ESTFILTER,
+                MipTypes::DataClass::CLASS_GNSS1,
+                MipTypes::DataClass::CLASS_GNSS2,
+                MipTypes::DataClass::CLASS_AHRS_IMU
+            };
+        }
+    }
+
+    NmeaMessageFormats NmeaMessageFormat::fromCommandResponse(const MipFieldValues& responseValues, const uint8 startIndex)
+    {
+        const uint8 count = responseValues[startIndex].as_uint8();
+        const uint8 ELEMENTS_PER_FORMAT = 4;
+
+        NmeaMessageFormats messageFormat;
+        for (uint8 i = 0; i < count; i++)
+        {
+            // skip count element and find beginning of target format element
+            const uint8 index = 1 + (i * ELEMENTS_PER_FORMAT);
+
+            NmeaMessageFormat format;
+            format.sentenceType(static_cast<SentenceType>(responseValues[index].as_uint8()));
+            format.talkerId(static_cast<Talker>(responseValues[index + 1].as_uint8()));
+            format.sourceDataClass(static_cast<MipTypes::DataClass>(responseValues[index + 2].as_uint8()));
+            format.sampleRate(SampleRate::Decimation(responseValues[index + 3].as_uint16()));
+
+            messageFormat.push_back(format);
+        }
+
+        return messageFormat;
+    }
+
+    MipFieldValues NmeaMessageFormat::toCommandParameters() const
+    {
+        return{
+            Value::UINT8(static_cast<uint8>(m_sentenceType)),
+            Value::UINT8(static_cast<uint8>(m_talkerId)),
+            Value::UINT8(static_cast<uint8>(m_sourceDescSet)),
+            Value::UINT16(m_decimation)
+        };
+    }
+
+    MipFieldValues NmeaMessageFormat::toCommandParameters(const NmeaMessageFormats& nmeaFormats)
+    {
+        // initialize params with count value
+        MipFieldValues params = { Value::UINT8(static_cast<uint8>(nmeaFormats.size())) };
+
+        for (NmeaMessageFormat format : nmeaFormats)
+        {
+            MipFieldValues entries = format.toCommandParameters();
+            params.insert(params.end(), entries.begin(), entries.end());
+        }
+
+        return params;
+    }
+
     //////////  Matrix  //////////
 
     Matrix_3x3::Matrix_3x3(float i00, float i01, float i02, float i10, float i11, float i12, float i20, float i21, float i22)
@@ -1011,6 +1181,57 @@ namespace mscl
         }
 
         m_unc = unc;
+    }
+
+    MipTypes::MipChannelFields EventActionMessageParameter::filterFields(const MipTypes::MipChannelFields& fields)
+    {
+        MipTypes::MipChannelFields filtered;
+        for (MipTypes::ChannelField field : fields)
+        {
+            MipTypes::DataClass fieldClass = static_cast<MipTypes::DataClass>(Utils::msb(static_cast<uint16>(field)));
+            if (fieldClass != m_descriptorSet)
+            {
+                continue;
+            }
+
+            filtered.push_back(field);
+        }
+
+        return filtered;
+    }
+
+    void EventActionMessageParameter::setChannelFields(MipTypes::DataClass dataClass, const MipTypes::MipChannelFields& fields)
+    {
+        // Set data class
+        m_descriptorSet = dataClass;
+
+        // Make sure the fields are defaulted
+        m_channelFields.fill(static_cast<MipTypes::ChannelField>(0));
+
+        // Filter out fields that aren't in the specified data class
+        const MipTypes::MipChannelFields filtered = filterFields(fields);
+
+        // Keep the size at or below MAX_DESCRIPTORS
+        const uint8 size = std::min(static_cast<uint8>(filtered.size()), MAX_DESCRIPTORS);
+
+        // Copy the fields into the descriptors
+        std::copy_n(filtered.begin(), size, m_channelFields.begin());
+    }
+
+    MipTypes::MipChannelFields EventActionMessageParameter::getChannelFields() const
+    {
+        MipTypes::MipChannelFields fields;
+
+        for (const MipTypes::ChannelField& field : m_channelFields)
+        {
+            // Only add non-default values
+            if (field != 0)
+            {
+                fields.push_back(field);
+            }
+        }
+
+        return fields;
     }
 
     bool EventTriggerInfo::isActive() const

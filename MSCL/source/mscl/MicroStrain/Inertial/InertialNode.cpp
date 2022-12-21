@@ -36,9 +36,9 @@ namespace mscl
         m_impl->pollData(dataClass, fields);
     }
 
-    uint16 InertialNode::getDataRateBase(MipTypes::DataClass dataClass)
+    uint16 InertialNode::getDataRateBase(MipTypes::DataClass dataClass) const
     {
-        return m_impl->getDataRateBase(dataClass);
+        return features().baseDataRate(dataClass);
     }
 
     MipChannels InertialNode::getActiveChannelFields(MipTypes::DataClass dataClass)
@@ -418,20 +418,20 @@ namespace mscl
         return m_impl->getConingAndScullingEnable();
     }
 
-    void InertialNode::setAdvancedLowPassFilterSettings(const AdvancedLowPassFilterConfig& data)
+    void InertialNode::setLowPassFilterSettings(const LowPassFilterConfig& data) const
     {
         for (size_t i = 0; i < data.size(); i++)
         {
-            m_impl->setAdvancedLowPassFilterSettings(data[i]);
+            m_impl->setLowPassFilterSettings(data[i]);
         }
     }
 
-    AdvancedLowPassFilterConfig InertialNode::getAdvancedLowPassFilterSettings(const MipTypes::MipChannelFields& dataDescriptors)
+    LowPassFilterConfig InertialNode::getLowPassFilterSettings(const MipTypes::MipChannelFields& dataDescriptors) const
     {
-        AdvancedLowPassFilterConfig data;
+        LowPassFilterConfig data;
         for (size_t i = 0; i < dataDescriptors.size(); i++)
         {
-            data.push_back(m_impl->getAdvancedLowPassFilterSettings(dataDescriptors[i]));
+            data.push_back(m_impl->getLowPassFilterSettings(dataDescriptors[i]));
         }
 
         return data;
@@ -1026,6 +1026,108 @@ namespace mscl
         m_impl->set(MipTypes::CMD_EVENT_TRIGGER_CONFIGURATION, values);
     }
 
+    EventActionConfiguration InertialNode::getEventActionConfig(const uint8 instance) const
+    {
+        const ByteStream response = m_impl->get_RawResponseData(MipTypes::CMD_EVENT_ACTION_CONFIGURATION, {
+            Value::UINT8(instance)
+        });
+        DataBuffer data(response);
+
+        EventActionConfiguration config;
+        config.instance = data.read_uint8();
+        config.trigger = data.read_uint8();
+        config.type = static_cast<EventActionConfiguration::Type>(data.read_uint8());
+
+        switch (config.type)
+        {
+        case EventActionConfiguration::Type::NONE:
+            break;
+
+        case EventActionConfiguration::Type::GPIO:
+            config.parameters.gpio.pin = data.read_uint8();
+            config.parameters.gpio.mode = static_cast<EventActionGpioParameter::Mode>(data.read_uint8());
+            break;
+
+        case EventActionConfiguration::Type::MESSAGE:
+        {
+            MipTypes::DataClass dataClass = static_cast<MipTypes::DataClass>(data.read_uint8());
+
+            // if decimation is 0, use Event SampleRate type - one packet output when event triggered
+            uint16 decimation = data.read_uint16();
+            if (decimation == 0)
+            {
+                config.parameters.message.sampleRate = SampleRate::Event();
+            }
+            else
+            {
+                uint16 baseRate = getDataRateBase(dataClass);
+                config.parameters.message.sampleRate = SampleRate::FromInertialRateDecimationInfo(baseRate, decimation);
+            }
+
+            const uint8 numFields = data.read_uint8();
+            MipTypes::MipChannelFields fields;
+            for (uint8 i = 0; i < numFields; i++)
+            {
+                fields.push_back(static_cast<MipTypes::ChannelField>(
+                    Utils::make_uint16(static_cast<uint8>(dataClass), data.read_uint8())));
+            }
+
+            config.parameters.message.setChannelFields(dataClass, fields);
+            break;
+        }
+
+        default:
+            break;
+        }
+
+        return config;
+    }
+
+    void InertialNode::setEventActionConfig(EventActionConfiguration config, const bool validateSupported/*= true*/) const
+    {
+        MipFieldValues mipValues = {
+            Value::UINT8(config.instance),
+            Value::UINT8(config.trigger),
+            Value::UINT8(static_cast<uint8>(config.type))
+        };
+
+        switch (config.type)
+        {
+        case EventActionConfiguration::Type::NONE:
+            break;
+
+        case EventActionConfiguration::Type::GPIO:
+        {
+            mipValues.push_back(Value::UINT8(config.parameters.gpio.pin));
+            mipValues.push_back(Value::UINT8(static_cast<uint8>(config.parameters.gpio.mode)));
+            break;
+        }
+
+        case EventActionConfiguration::Type::MESSAGE:
+        {
+            mipValues.push_back(Value::UINT8(static_cast<uint8>(config.parameters.message.dataClass())));
+            mipValues.push_back(Value::UINT16(
+                config.parameters.message.sampleRate.toDecimation(getDataRateBase(config.parameters.message.dataClass())))
+            );
+
+            MipTypes::MipChannelFields fields = config.parameters.message.getChannelFields();
+            fields = features().filterSupportedChannelFields(fields);
+
+            mipValues.push_back(Value::UINT8(static_cast<uint8>(fields.size())));
+
+            for (const MipTypes::ChannelField& field : fields)
+            {
+                mipValues.push_back(Value::UINT8(Utils::lsb(static_cast<uint16>(field))));
+            }
+            break;
+        }
+
+        default:
+            break;
+        }
+        m_impl->set(MipTypes::CMD_EVENT_ACTION_CONFIGURATION, mipValues);
+    }
+
     AntennaLeverArmCalConfiguration InertialNode::getAntennaLeverArmCal() const
     {
         MipFieldValues data = m_impl->get(MipTypes::CMD_EF_GNSS_ANTENNA_LEVER_ARM_CAL);
@@ -1063,6 +1165,26 @@ namespace mscl
             Value::DOUBLE(ref.position.x()),
             Value::DOUBLE(ref.position.y()),
             Value::DOUBLE(ref.position.z()),
+        });
+    }
+
+    PositionOffset InertialNode::getLeverArmReferenceOffset() const
+    {
+        const MipFieldValues data = m_impl->get(MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF, {
+            Value::UINT8(1) // reserved, placeholder source value
+        });
+
+        // skip first element - reserved, placeholder source value
+        return PositionOffset(data[1].as_float(), data[2].as_float(), data[3].as_float());
+    }
+
+    void InertialNode::setLeverArmReferenceOffset(const PositionOffset offset) const
+    {
+        m_impl->set(MipTypes::CMD_EF_LEVER_ARM_OFFSET_REF, {
+            Value::UINT8(1), // reserved, placeholder source value
+            Value::FLOAT(offset.x()),
+            Value::FLOAT(offset.y()),
+            Value::FLOAT(offset.z()),
         });
     }
 
@@ -1134,7 +1256,7 @@ namespace mscl
         });
     }
 
-    EventTriggerStatus InertialNode::getEventTriggerStatus(const std::vector<uint8> instances) const
+    EventTriggerStatus InertialNode::getEventTriggerStatus(const std::vector<uint8> instances/*= std::vector<uint8>()*/) const
     {
         std::vector<Value> specifier = { Value::UINT8(static_cast<uint8>(instances.size())) };
         
@@ -1158,12 +1280,70 @@ namespace mscl
                 static_cast<EventTriggerConfiguration::Type>(data[index].as_uint8()), // type
                 // If instances count is 0, user requested all triggers
                 instances.empty() ?
-                    static_cast<uint8>(instanceIndex + 1):
-                    instances[instanceIndex],                                            // instanceId
-                data[index + 1].as_uint8()                                               // status
+                    static_cast<uint8>(instanceIndex + 1) :
+                    instances[instanceIndex],                                         // instanceId
+                data[index + 1].as_uint8()                                            // status
             });
         }
         
         return status;
+    }
+
+    EventActionStatus InertialNode::getEventActionStatus(const std::vector<uint8> instances/*= std::vector<uint8>()*/) const
+    {
+        std::vector<Value> specifier = { Value::UINT8(static_cast<uint8>(instances.size())) };
+
+        for (const uint8& instance : instances)
+        {
+            specifier.push_back(Value::UINT8(instance));
+        }
+
+        const MipFieldValues data = m_impl->get(MipTypes::CMD_EVENT_ACTION_STATUS, specifier);
+
+        const uint8 count = data[0].as_uint8();
+
+        EventActionStatus status;
+
+        // Data values start at index 1 and have 2 data entries
+        for (int index = 1; index < count * 2 + 1; index += 2)
+        {
+            const int instanceIndex = (index - 1) / 2;
+
+            status.push_back({
+                static_cast<EventActionConfiguration::Type>(data[index].as_uint8()), // type
+                data[index + 1].as_uint8(),                                          // triggerId
+                // If instances count is 0, user requested all actions
+                instances.empty() ?
+                    static_cast<uint8>(instanceIndex + 1) :
+                    instances[instanceIndex]                                         // instanceId
+            });
+        }
+
+        return status;
+    }
+
+    NmeaMessageFormats InertialNode::getNmeaMessageFormat() const
+    {
+        const MipFieldValues resData = m_impl->get(MipTypes::CMD_NMEA_MESSAGE_FORMAT);
+        NmeaMessageFormats nmeaFormats = NmeaMessageFormat::fromCommandResponse(resData);
+
+        // try to assign base rates for sample rates reported in Hz or seconds instead of just Decimation
+        for (NmeaMessageFormat& format : nmeaFormats)
+        {
+            try
+            {
+                const uint16 baseRate = getDataRateBase(format.sourceDataClass());
+                format.baseRate(baseRate);
+            }
+            catch (const Error&) {/*ignore*/ }
+        }
+
+        return nmeaFormats;
+    }
+
+    void InertialNode::setNmeaMessageFormat(NmeaMessageFormats nmeaFormats) const
+    {
+        const MipFieldValues params = NmeaMessageFormat::toCommandParameters(nmeaFormats);
+        m_impl->set(MipTypes::CMD_NMEA_MESSAGE_FORMAT, params);
     }
 }

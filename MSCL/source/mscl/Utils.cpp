@@ -24,18 +24,19 @@ namespace mscl
     {
         uint32 valueTypeSize(ValueType type)
         {
-            switch(type)
+            switch (type)
             {
             case valueType_double:
+            case valueType_uint64:
                 return 8;
 
             case valueType_float:
             case valueType_int32:
+            case valueType_uint32:
                 return 4;
 
             case valueType_int16:
             case valueType_uint16:
-            case valueType_uint32:
                 return 2;
 
             case valueType_uint8:
@@ -74,7 +75,7 @@ namespace mscl
         {
             int16 val;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 val = SystemEndian_To_BigEndian(value);
             }
@@ -102,7 +103,7 @@ namespace mscl
             temp[0] = low;
             temp[1] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -125,7 +126,7 @@ namespace mscl
             temp[2] = byte3;
             temp[3] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -139,7 +140,7 @@ namespace mscl
         {
             uint16 val;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 val = SystemEndian_To_BigEndian(value);
             }
@@ -167,7 +168,7 @@ namespace mscl
             temp[0] = low;
             temp[1] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -181,7 +182,7 @@ namespace mscl
         {
             uint32 val;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 val = SystemEndian_To_BigEndian(value);
             }
@@ -204,7 +205,7 @@ namespace mscl
         {
             uint64 val;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 val = SystemEndian_To_BigEndian(value);
             }
@@ -240,7 +241,7 @@ namespace mscl
             temp[2] = byte3;
             temp[3] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -267,7 +268,7 @@ namespace mscl
             temp[6] = byte7;
             temp[7] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -281,7 +282,7 @@ namespace mscl
         {
             float val;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 val = SystemEndian_To_BigEndian(value);
             }
@@ -313,7 +314,7 @@ namespace mscl
             temp[2] = byte3;
             temp[3] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -327,7 +328,7 @@ namespace mscl
         {
             double val;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 val = SystemEndian_To_BigEndian(value);
             }
@@ -367,7 +368,7 @@ namespace mscl
             temp[6] = byte7;
             temp[7] = high;
 
-            if(endian == Endianness::bigEndian)
+            if (endian == Endianness::bigEndian)
             {
                 return BigEndian_To_SystemEndian(result);
             }
@@ -396,17 +397,17 @@ namespace mscl
 
         float round(float value)
         {
-            return std::floor( value + 0.5f );
+            return std::floor(value + 0.5f);
         }
 
         uint32 floorBase2(double value)
         {
-            return static_cast<uint32>( std::pow( 2, std::floor( std::log2(value) ) ) );
+            return static_cast<uint32>(std::pow(2, std::floor(std::log2(value))));
         }
 
         uint32 ceilBase2(double value)
         {
-            return static_cast<uint32>( std::pow(2, std::ceil( std::log2(value) ) ) );
+            return static_cast<uint32>(std::pow(2, std::ceil(std::log2(value))));
         }
 
         double radiansToDegrees(float angle)
@@ -422,9 +423,9 @@ namespace mscl
         void removeStr(std::string& src, const std::string& strToRemove)
         {
             std::string::size_type strPos;
-            
+
             //attempt to find the strToRemove for as many times as it exists in the src string
-            for(strPos = src.find(strToRemove); strPos != std::string::npos; strPos = src.find(strToRemove))
+            for (strPos = src.find(strToRemove); strPos != std::string::npos; strPos = src.find(strToRemove))
             {
                 //erase the string from the source string
                 src.erase(strPos, strToRemove.length());
@@ -440,7 +441,7 @@ namespace mscl
         {
             std::size_t found = src.find_first_not_of(" \t\f\v\n\r");
 
-            if(found != std::string::npos)
+            if (found != std::string::npos)
             {
                 src.erase(0, found);
             }
@@ -454,7 +455,7 @@ namespace mscl
         {
             std::size_t found = src.find_last_not_of(" \t\f\v\n\r");
 
-            if(found != std::string::npos)
+            if (found != std::string::npos)
             {
                 src.erase(found + 1);
             }
@@ -470,15 +471,72 @@ namespace mscl
             strTrimRight(src);
         }
 
+        std::vector<std::string> regexFindAll(const std::string& basicString, const std::regex& pattern)
+        {
+            // Create an iterator of all the matches
+            const auto matches = std::sregex_iterator(basicString.begin(), basicString.end(), pattern);
+
+            // List to add each match
+            std::vector<std::string> matchList;
+
+            // Add each match to the list
+            for (std::sregex_iterator subMatch = matches; subMatch != std::sregex_iterator(); ++subMatch)
+            {
+                // Get the string from the match
+                std::string found = subMatch->str();
+
+                // Add it to the list to return
+                matchList.push_back(found);
+            }
+
+            return matchList;
+        }
+
+        std::vector<std::string> tokenize(const std::string& basicString, const std::string& delimiter, bool includeEmpty)
+        {
+            // List to store all the delimited segments
+            std::vector<std::string> segments;
+
+            // Position tracking of delimiters
+            std::size_t previousPosition = 0;
+
+            // Find the first delimiter
+            std::size_t found;
+
+            // Extract segments until the end of the string
+            do
+            {
+                // Find the next delimiter
+                found = basicString.find(delimiter, previousPosition);
+
+                // Get the substring between the previous and current delimiter
+                const std::string substring = basicString.substr(previousPosition, found - previousPosition);
+                
+                // Delimiter at the beginning/end of the string will get an empty substring
+                if (includeEmpty || !substring.empty())
+                {
+                    // Add the substring to the list
+                    segments.push_back(substring);
+                }
+
+                // Set the next read position after the delimiter
+                previousPosition = found + delimiter.length();
+            }
+            while(found != std::string::npos);
+
+            // Return all the segments
+            return segments;
+        }
+
         void filterSensorcloudName(std::string& str)
         {
             //replace all characters that don't match (a-z)(A-Z)(0-9)-_. with a '-'
-            for(std::size_t i=0; i < str.length(); i++) 
+            for (std::size_t i = 0; i < str.length(); i++)
             {
-              if (!isalnum(str[i]) && str[i] != '-' && str[i] != '.' && str[i] != '_')
-              {
-                str[i] = '-';
-              }
+                if (!isalnum(str[i]) && str[i] != '-' && str[i] != '.' && str[i] != '_')
+                {
+                    str[i] = '-';
+                }
             }
         }
 
@@ -486,7 +544,7 @@ namespace mscl
         {
             angle = fmod(angle, 360.0f);
 
-            if(angle < 0.0f)
+            if (angle < 0.0f)
             {
                 angle = 360 + angle;
             }

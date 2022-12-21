@@ -669,6 +669,9 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Value_as_uint32")]
   public static extern uint Value_as_uint32(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Value_as_uint64")]
+  public static extern ulong Value_as_uint64(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Value_as_int8")]
   public static extern sbyte Value_as_int8(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -724,28 +727,43 @@ class msclPINVOKE {
   public static extern void delete_Histogram(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_Timestamp__SWIG_0")]
-  public static extern global::System.IntPtr new_Timestamp__SWIG_0(ulong jarg1);
+  public static extern global::System.IntPtr new_Timestamp__SWIG_0(ulong jarg1, int jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_Timestamp__SWIG_1")]
-  public static extern global::System.IntPtr new_Timestamp__SWIG_1();
+  public static extern global::System.IntPtr new_Timestamp__SWIG_1(ulong jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_Timestamp__SWIG_2")]
-  public static extern global::System.IntPtr new_Timestamp__SWIG_2(ushort jarg1, ushort jarg2, ushort jarg3, ushort jarg4, ushort jarg5, ushort jarg6, uint jarg7);
+  public static extern global::System.IntPtr new_Timestamp__SWIG_2();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_Timestamp__SWIG_3")]
+  public static extern global::System.IntPtr new_Timestamp__SWIG_3(ushort jarg1, ushort jarg2, ushort jarg3, ushort jarg4, ushort jarg5, ushort jarg6, uint jarg7);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_Timestamp")]
   public static extern void delete_Timestamp(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_nanoseconds")]
-  public static extern ulong Timestamp_nanoseconds(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_nanoseconds__SWIG_0")]
+  public static extern ulong Timestamp_nanoseconds__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_seconds")]
-  public static extern ulong Timestamp_seconds(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_nanoseconds__SWIG_1")]
+  public static extern ulong Timestamp_nanoseconds__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_seconds__SWIG_0")]
+  public static extern ulong Timestamp_seconds__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_seconds__SWIG_1")]
+  public static extern ulong Timestamp_seconds__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_storedEpoch")]
+  public static extern int Timestamp_storedEpoch(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_ToString")]
   public static extern string Timestamp_ToString(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_setTime")]
-  public static extern void Timestamp_setTime(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_setTime__SWIG_0")]
+  public static extern void Timestamp_setTime__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_setTime__SWIG_1")]
+  public static extern void Timestamp_setTime__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_setTimeNow")]
   public static extern void Timestamp_setTimeNow(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -759,8 +777,14 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_getLeapSeconds")]
   public static extern byte Timestamp_getLeapSeconds();
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_gpsTimeToUtcTime")]
-  public static extern ulong Timestamp_gpsTimeToUtcTime(double jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_gpsTimeToUtcTime__SWIG_0")]
+  public static extern ulong Timestamp_gpsTimeToUtcTime__SWIG_0(double jarg1, ushort jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_gpsTimeToUtcTime__SWIG_1")]
+  public static extern ulong Timestamp_gpsTimeToUtcTime__SWIG_1(ulong jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Timestamp_utcTimeToGpsTime")]
+  public static extern ulong Timestamp_utcTimeToGpsTime(ulong jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_TimeSpan_NANOSECONDS_PER_MICROSECOND_get")]
   public static extern ulong TimeSpan_NANOSECONDS_PER_MICROSECOND_get();
@@ -933,6 +957,9 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Connection_description")]
   public static extern string Connection_description(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Connection_port")]
+  public static extern string Connection_port(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Connection_type")]
   public static extern int Connection_type(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -1077,6 +1104,9 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_SampleRate_toWirelessSampleRate")]
   public static extern int SampleRate_toWirelessSampleRate(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_SampleRate_toDecimation")]
+  public static extern ushort SampleRate_toDecimation(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_SampleRate_Hertz")]
   public static extern global::System.IntPtr SampleRate_Hertz(uint jarg1);
 
@@ -1178,6 +1208,18 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Bitfield_set__SWIG_1")]
   public static extern void Bitfield_set__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, ulong jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Bitfield_checkBit__SWIG_0")]
+  public static extern bool Bitfield_checkBit__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2, byte jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Bitfield_checkBit__SWIG_1")]
+  public static extern bool Bitfield_checkBit__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Bitfield_setBit__SWIG_0")]
+  public static extern void Bitfield_setBit__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2, bool jarg3, byte jarg4);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_Bitfield_setBit__SWIG_1")]
+  public static extern void Bitfield_setBit__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2, bool jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_StructuralHealth")]
   public static extern global::System.IntPtr new_StructuralHealth(float jarg1, uint jarg2, float jarg3, global::System.Runtime.InteropServices.HandleRef jarg4, global::System.Runtime.InteropServices.HandleRef jarg5);
@@ -3744,6 +3786,9 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_MipCommandBytes")]
   public static extern void delete_MipCommandBytes(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_INFO_NOT_FOUND_get")]
+  public static extern string GnssReceiverInfo_INFO_NOT_FOUND_get();
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_GnssReceiverInfo__SWIG_0")]
   public static extern global::System.IntPtr new_GnssReceiverInfo__SWIG_0();
 
@@ -3767,6 +3812,24 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_description_get")]
   public static extern string GnssReceiverInfo_description_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_module_set")]
+  public static extern void GnssReceiverInfo_module_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_module_get")]
+  public static extern string GnssReceiverInfo_module_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_fwId_set")]
+  public static extern void GnssReceiverInfo_fwId_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_fwId_get")]
+  public static extern string GnssReceiverInfo_fwId_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_fwVersion_set")]
+  public static extern void GnssReceiverInfo_fwVersion_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssReceiverInfo_fwVersion_get")]
+  public static extern global::System.IntPtr GnssReceiverInfo_fwVersion_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_GnssReceiverInfo")]
   public static extern void delete_GnssReceiverInfo(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -3869,6 +3932,60 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_InertialTypes")]
   public static extern void delete_InertialTypes(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_MAX_MESSAGES_get")]
+  public static extern byte NmeaMessageFormat_MAX_MESSAGES_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_MAX_FREQUENCY_get")]
+  public static extern global::System.IntPtr NmeaMessageFormat_MAX_FREQUENCY_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_NmeaMessageFormat")]
+  public static extern global::System.IntPtr new_NmeaMessageFormat();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_NmeaMessageFormat")]
+  public static extern void delete_NmeaMessageFormat(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sentenceType__SWIG_0")]
+  public static extern void NmeaMessageFormat_sentenceType__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sentenceType__SWIG_1")]
+  public static extern int NmeaMessageFormat_sentenceType__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_talkerId__SWIG_0")]
+  public static extern void NmeaMessageFormat_talkerId__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_talkerId__SWIG_1")]
+  public static extern int NmeaMessageFormat_talkerId__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sourceDataClass__SWIG_0")]
+  public static extern void NmeaMessageFormat_sourceDataClass__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, ushort jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sourceDataClass__SWIG_1")]
+  public static extern void NmeaMessageFormat_sourceDataClass__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sourceDataClass__SWIG_2")]
+  public static extern int NmeaMessageFormat_sourceDataClass__SWIG_2(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sampleRate__SWIG_0")]
+  public static extern void NmeaMessageFormat_sampleRate__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, ushort jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sampleRate__SWIG_1")]
+  public static extern void NmeaMessageFormat_sampleRate__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_sampleRate__SWIG_2")]
+  public static extern global::System.IntPtr NmeaMessageFormat_sampleRate__SWIG_2(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_talkerIdRequired")]
+  public static extern bool NmeaMessageFormat_talkerIdRequired(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_dataClassSupported")]
+  public static extern bool NmeaMessageFormat_dataClassSupported(int jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_supportedDataClasses")]
+  public static extern global::System.IntPtr NmeaMessageFormat_supportedDataClasses(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormat_toCommandParameters")]
+  public static extern global::System.IntPtr NmeaMessageFormat_toCommandParameters(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_Matrix_3x3__SWIG_0")]
   public static extern global::System.IntPtr new_Matrix_3x3__SWIG_0(float jarg1, float jarg2, float jarg3, float jarg4, float jarg5, float jarg6, float jarg7, float jarg8, float jarg9);
@@ -4191,44 +4308,44 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_ConstellationSettingsData")]
   public static extern void delete_ConstellationSettingsData(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_AdvancedLowPassFilterData__SWIG_0")]
-  public static extern global::System.IntPtr new_AdvancedLowPassFilterData__SWIG_0();
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_LowPassFilterData__SWIG_0")]
+  public static extern global::System.IntPtr new_LowPassFilterData__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_AdvancedLowPassFilterData__SWIG_1")]
-  public static extern global::System.IntPtr new_AdvancedLowPassFilterData__SWIG_1(int jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_LowPassFilterData__SWIG_1")]
+  public static extern global::System.IntPtr new_LowPassFilterData__SWIG_1(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_dataDescriptor_set")]
-  public static extern void AdvancedLowPassFilterData_dataDescriptor_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_dataDescriptor_set")]
+  public static extern void LowPassFilterData_dataDescriptor_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_dataDescriptor_get")]
-  public static extern int AdvancedLowPassFilterData_dataDescriptor_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_dataDescriptor_get")]
+  public static extern int LowPassFilterData_dataDescriptor_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_manualFilterBandwidthConfig_set")]
-  public static extern void AdvancedLowPassFilterData_manualFilterBandwidthConfig_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_manualFilterBandwidthConfig_set")]
+  public static extern void LowPassFilterData_manualFilterBandwidthConfig_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_manualFilterBandwidthConfig_get")]
-  public static extern int AdvancedLowPassFilterData_manualFilterBandwidthConfig_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_manualFilterBandwidthConfig_get")]
+  public static extern int LowPassFilterData_manualFilterBandwidthConfig_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_applyLowPassFilter_set")]
-  public static extern void AdvancedLowPassFilterData_applyLowPassFilter_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_applyLowPassFilter_set")]
+  public static extern void LowPassFilterData_applyLowPassFilter_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_applyLowPassFilter_get")]
-  public static extern bool AdvancedLowPassFilterData_applyLowPassFilter_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_applyLowPassFilter_get")]
+  public static extern bool LowPassFilterData_applyLowPassFilter_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_cutoffFrequency_set")]
-  public static extern void AdvancedLowPassFilterData_cutoffFrequency_set(global::System.Runtime.InteropServices.HandleRef jarg1, ushort jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_cutoffFrequency_set")]
+  public static extern void LowPassFilterData_cutoffFrequency_set(global::System.Runtime.InteropServices.HandleRef jarg1, float jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_cutoffFrequency_get")]
-  public static extern ushort AdvancedLowPassFilterData_cutoffFrequency_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_cutoffFrequency_get")]
+  public static extern float LowPassFilterData_cutoffFrequency_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_getDataDescriptorForCommand")]
-  public static extern byte AdvancedLowPassFilterData_getDataDescriptorForCommand(int jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_getDataDescriptorForCommand")]
+  public static extern byte LowPassFilterData_getDataDescriptorForCommand(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterData_getDataDescriptorFromUint8")]
-  public static extern int AdvancedLowPassFilterData_getDataDescriptorFromUint8(byte jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterData_getDataDescriptorFromUint8")]
+  public static extern int LowPassFilterData_getDataDescriptorFromUint8(byte jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_AdvancedLowPassFilterData")]
-  public static extern void delete_AdvancedLowPassFilterData(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_LowPassFilterData")]
+  public static extern void delete_LowPassFilterData(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_ComplementaryFilterData")]
   public static extern global::System.IntPtr new_ComplementaryFilterData();
@@ -5481,6 +5598,9 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventTriggerCombinationParameter")]
   public static extern void delete_EventTriggerCombinationParameter(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventTriggerParameters")]
+  public static extern global::System.IntPtr new_EventTriggerParameters();
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventTriggerParameters_gpio_set")]
   public static extern void EventTriggerParameters_gpio_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
@@ -5498,9 +5618,6 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventTriggerParameters_combination_get")]
   public static extern global::System.IntPtr EventTriggerParameters_combination_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventTriggerParameters")]
-  public static extern global::System.IntPtr new_EventTriggerParameters();
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventTriggerParameters")]
   public static extern void delete_EventTriggerParameters(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -5528,6 +5645,96 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventTriggerConfiguration")]
   public static extern void delete_EventTriggerConfiguration(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionGpioParameter_pin_set")]
+  public static extern void EventActionGpioParameter_pin_set(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionGpioParameter_pin_get")]
+  public static extern byte EventActionGpioParameter_pin_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionGpioParameter_mode_set")]
+  public static extern void EventActionGpioParameter_mode_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionGpioParameter_mode_get")]
+  public static extern int EventActionGpioParameter_mode_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionGpioParameter")]
+  public static extern global::System.IntPtr new_EventActionGpioParameter();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventActionGpioParameter")]
+  public static extern void delete_EventActionGpioParameter(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionMessageParameter_MAX_DESCRIPTORS_get")]
+  public static extern byte EventActionMessageParameter_MAX_DESCRIPTORS_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionMessageParameter_sampleRate_set")]
+  public static extern void EventActionMessageParameter_sampleRate_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionMessageParameter_sampleRate_get")]
+  public static extern global::System.IntPtr EventActionMessageParameter_sampleRate_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionMessageParameter_dataClass")]
+  public static extern int EventActionMessageParameter_dataClass(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionMessageParameter_setChannelFields")]
+  public static extern void EventActionMessageParameter_setChannelFields(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionMessageParameter_getChannelFields")]
+  public static extern global::System.IntPtr EventActionMessageParameter_getChannelFields(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionMessageParameter")]
+  public static extern global::System.IntPtr new_EventActionMessageParameter();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventActionMessageParameter")]
+  public static extern void delete_EventActionMessageParameter(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionParameters")]
+  public static extern global::System.IntPtr new_EventActionParameters();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionParameters_gpio_set")]
+  public static extern void EventActionParameters_gpio_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionParameters_gpio_get")]
+  public static extern global::System.IntPtr EventActionParameters_gpio_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionParameters_message_set")]
+  public static extern void EventActionParameters_message_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionParameters_message_get")]
+  public static extern global::System.IntPtr EventActionParameters_message_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventActionParameters")]
+  public static extern void delete_EventActionParameters(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_instance_set")]
+  public static extern void EventActionConfiguration_instance_set(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_instance_get")]
+  public static extern byte EventActionConfiguration_instance_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_trigger_set")]
+  public static extern void EventActionConfiguration_trigger_set(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_trigger_get")]
+  public static extern byte EventActionConfiguration_trigger_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_type_set")]
+  public static extern void EventActionConfiguration_type_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_type_get")]
+  public static extern int EventActionConfiguration_type_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_parameters_set")]
+  public static extern void EventActionConfiguration_parameters_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionConfiguration_parameters_get")]
+  public static extern global::System.IntPtr EventActionConfiguration_parameters_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionConfiguration")]
+  public static extern global::System.IntPtr new_EventActionConfiguration();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventActionConfiguration")]
+  public static extern void delete_EventActionConfiguration(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventTriggerInfo__SWIG_0")]
   public static extern global::System.IntPtr new_EventTriggerInfo__SWIG_0();
@@ -5561,6 +5768,33 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventTriggerInfo")]
   public static extern void delete_EventTriggerInfo(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionInfo__SWIG_0")]
+  public static extern global::System.IntPtr new_EventActionInfo__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionInfo__SWIG_1")]
+  public static extern global::System.IntPtr new_EventActionInfo__SWIG_1(int jarg1, byte jarg2, byte jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionInfo_type_set")]
+  public static extern void EventActionInfo_type_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionInfo_type_get")]
+  public static extern int EventActionInfo_type_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionInfo_triggerId_set")]
+  public static extern void EventActionInfo_triggerId_set(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionInfo_triggerId_get")]
+  public static extern byte EventActionInfo_triggerId_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionInfo_instanceId_set")]
+  public static extern void EventActionInfo_instanceId_set(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionInfo_instanceId_get")]
+  public static extern byte EventActionInfo_instanceId_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventActionInfo")]
+  public static extern void delete_EventActionInfo(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_MipChannel__SWIG_0")]
   public static extern global::System.IntPtr new_MipChannel__SWIG_0(int jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
@@ -5625,6 +5859,384 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_MipDataPoint")]
   public static extern void delete_MipDataPoint(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_ContinuousBIT_as_MipDataPoints")]
+  public static extern global::System.IntPtr ContinuousBIT_as_MipDataPoints(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_ContinuousBIT_getMipDataPoints")]
+  public static extern global::System.IntPtr ContinuousBIT_getMipDataPoints(int jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_ContinuousBIT")]
+  public static extern void delete_ContinuousBIT(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_System_General__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_System_General__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_System_General__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_System_General__SWIG_1(byte jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_SYSTEM_CLOCK_FAILURE_get")]
+  public static extern byte CV7ContinuousBIT_System_General_SYSTEM_CLOCK_FAILURE_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_POWER_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_System_General_POWER_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_FIRMWARE_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_System_General_FIRMWARE_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_TIMING_OVERLOAD_get")]
+  public static extern byte CV7ContinuousBIT_System_General_TIMING_OVERLOAD_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_BUFFER_OVERRUN_get")]
+  public static extern byte CV7ContinuousBIT_System_General_BUFFER_OVERRUN_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_flags")]
+  public static extern byte CV7ContinuousBIT_System_General_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_systemClockFailure")]
+  public static extern bool CV7ContinuousBIT_System_General_systemClockFailure(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_powerFault")]
+  public static extern bool CV7ContinuousBIT_System_General_powerFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_firmwareFault")]
+  public static extern bool CV7ContinuousBIT_System_General_firmwareFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_timingOverload")]
+  public static extern bool CV7ContinuousBIT_System_General_timingOverload(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_bufferOverrun")]
+  public static extern bool CV7ContinuousBIT_System_General_bufferOverrun(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_System_General")]
+  public static extern void delete_CV7ContinuousBIT_System_General(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_System_Process__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_System_Process__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_System_Process__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_System_Process__SWIG_1(byte jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_IMU_PROCESS_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_IMU_PROCESS_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_IMU_RATE_MISMATCH_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_IMU_RATE_MISMATCH_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_IMU_DROPPED_DATA_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_IMU_DROPPED_DATA_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_IMU_STUCK_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_IMU_STUCK_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_FILTER_PROCESS_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_FILTER_PROCESS_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_FILTER_DROPPED_DATA_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_FILTER_DROPPED_DATA_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_FILTER_RATE_MISMATCH_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_FILTER_RATE_MISMATCH_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_FILTER_STUCK_get")]
+  public static extern byte CV7ContinuousBIT_System_Process_FILTER_STUCK_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_flags")]
+  public static extern byte CV7ContinuousBIT_System_Process_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_imuProcessFault")]
+  public static extern bool CV7ContinuousBIT_System_Process_imuProcessFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_imuRateMismatch")]
+  public static extern bool CV7ContinuousBIT_System_Process_imuRateMismatch(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_imuDroppedData")]
+  public static extern bool CV7ContinuousBIT_System_Process_imuDroppedData(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_imuStuck")]
+  public static extern bool CV7ContinuousBIT_System_Process_imuStuck(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_filterProcessFault")]
+  public static extern bool CV7ContinuousBIT_System_Process_filterProcessFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_filterDroppedData")]
+  public static extern bool CV7ContinuousBIT_System_Process_filterDroppedData(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_filterRateMismatch")]
+  public static extern bool CV7ContinuousBIT_System_Process_filterRateMismatch(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_filterStuck")]
+  public static extern bool CV7ContinuousBIT_System_Process_filterStuck(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_System_Process")]
+  public static extern void delete_CV7ContinuousBIT_System_Process(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_System__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_System__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_System__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_System__SWIG_1(uint jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_RESPONSE_OFFSET_get")]
+  public static extern byte CV7ContinuousBIT_System_RESPONSE_OFFSET_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_GENERAL_FLAGS_get")]
+  public static extern uint CV7ContinuousBIT_System_GENERAL_FLAGS_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_PROCESS_FLAGS_get")]
+  public static extern uint CV7ContinuousBIT_System_PROCESS_FLAGS_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_flags")]
+  public static extern uint CV7ContinuousBIT_System_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_general")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_System_general(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_process")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_System_process(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_System")]
+  public static extern void delete_CV7ContinuousBIT_System(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_IMU_General__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_IMU_General__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_IMU_General__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_IMU_General__SWIG_1(byte jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_CLOCK_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_IMU_General_CLOCK_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_COMMUNICATION_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_IMU_General_COMMUNICATION_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_TIMING_OVERRUN_get")]
+  public static extern byte CV7ContinuousBIT_IMU_General_TIMING_OVERRUN_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_CALIBRATION_ERROR_ACCEL_get")]
+  public static extern byte CV7ContinuousBIT_IMU_General_CALIBRATION_ERROR_ACCEL_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_CALIBRATION_ERROR_GYRO_get")]
+  public static extern byte CV7ContinuousBIT_IMU_General_CALIBRATION_ERROR_GYRO_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_CALIBRATION_ERROR_MAG_get")]
+  public static extern byte CV7ContinuousBIT_IMU_General_CALIBRATION_ERROR_MAG_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_flags")]
+  public static extern byte CV7ContinuousBIT_IMU_General_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_clockFault")]
+  public static extern bool CV7ContinuousBIT_IMU_General_clockFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_communicationFault")]
+  public static extern bool CV7ContinuousBIT_IMU_General_communicationFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_timingOverrun")]
+  public static extern bool CV7ContinuousBIT_IMU_General_timingOverrun(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_calibrationErrorAccel")]
+  public static extern bool CV7ContinuousBIT_IMU_General_calibrationErrorAccel(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_calibrationErrorGyro")]
+  public static extern bool CV7ContinuousBIT_IMU_General_calibrationErrorGyro(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_calibrationErrorMag")]
+  public static extern bool CV7ContinuousBIT_IMU_General_calibrationErrorMag(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_IMU_General")]
+  public static extern void delete_CV7ContinuousBIT_IMU_General(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_IMU_Sensors__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_IMU_Sensors__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_IMU_Sensors__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_IMU_Sensors__SWIG_1(ushort jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_ACCEL_GENERAL_FAULT_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_ACCEL_GENERAL_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_ACCEL_OVERRANGE_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_ACCEL_OVERRANGE_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_ACCEL_SELF_TEST_FAIL_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_ACCEL_SELF_TEST_FAIL_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_GYRO_GENERAL_FAULT_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_GYRO_GENERAL_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_GYRO_OVERRANGE_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_GYRO_OVERRANGE_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_GYRO_SELF_TEST_FAIL_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_GYRO_SELF_TEST_FAIL_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_MAG_GENERAL_FAULT_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_MAG_GENERAL_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_MAG_OVERRANGE_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_MAG_OVERRANGE_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_MAG_SELF_TEST_FAIL_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_MAG_SELF_TEST_FAIL_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_PRESSURE_GENERAL_FAULT_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_PRESSURE_GENERAL_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_PRESSURE_OVERRANGE_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_PRESSURE_OVERRANGE_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_PRESSURE_SELF_TEST_FAIL_get")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_PRESSURE_SELF_TEST_FAIL_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_flags")]
+  public static extern ushort CV7ContinuousBIT_IMU_Sensors_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_accelGeneralFault")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_accelGeneralFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_accelOverrange")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_accelOverrange(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_accelSelfTestFail")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_accelSelfTestFail(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_gyroGeneralFault")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_gyroGeneralFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_gyroOverrange")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_gyroOverrange(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_gyroSelfTestFail")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_gyroSelfTestFail(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_magGeneralFault")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_magGeneralFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_magOverrange")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_magOverrange(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_magSelfTestFail")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_magSelfTestFail(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_pressureGeneralFault")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_pressureGeneralFault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_pressureOverrange")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_pressureOverrange(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_pressureSelfTestFail")]
+  public static extern bool CV7ContinuousBIT_IMU_Sensors_pressureSelfTestFail(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_IMU_Sensors")]
+  public static extern void delete_CV7ContinuousBIT_IMU_Sensors(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_IMU__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_IMU__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_IMU__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_IMU__SWIG_1(uint jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_RESPONSE_OFFSET_get")]
+  public static extern byte CV7ContinuousBIT_IMU_RESPONSE_OFFSET_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_GENERAL_FLAGS_get")]
+  public static extern uint CV7ContinuousBIT_IMU_GENERAL_FLAGS_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_SENSORS_FLAGS_get")]
+  public static extern uint CV7ContinuousBIT_IMU_SENSORS_FLAGS_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_FACTORY_BITS_INVALID_get")]
+  public static extern uint CV7ContinuousBIT_IMU_FACTORY_BITS_INVALID_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_flags")]
+  public static extern uint CV7ContinuousBIT_IMU_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_general")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_IMU_general(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_sensors")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_IMU_sensors(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_factoryBitsInvalid")]
+  public static extern bool CV7ContinuousBIT_IMU_factoryBitsInvalid(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_IMU")]
+  public static extern void delete_CV7ContinuousBIT_IMU(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_Filter_General__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_Filter_General__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_Filter_General__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_Filter_General__SWIG_1(byte jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_FAULT_get")]
+  public static extern byte CV7ContinuousBIT_Filter_General_FAULT_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_TIMING_OVERRUN_get")]
+  public static extern byte CV7ContinuousBIT_Filter_General_TIMING_OVERRUN_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_TIMING_UNDERRUN_get")]
+  public static extern byte CV7ContinuousBIT_Filter_General_TIMING_UNDERRUN_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_flags")]
+  public static extern byte CV7ContinuousBIT_Filter_General_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_fault")]
+  public static extern bool CV7ContinuousBIT_Filter_General_fault(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_timingOverrun")]
+  public static extern bool CV7ContinuousBIT_Filter_General_timingOverrun(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_timingUnderrun")]
+  public static extern bool CV7ContinuousBIT_Filter_General_timingUnderrun(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_Filter_General")]
+  public static extern void delete_CV7ContinuousBIT_Filter_General(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_Filter__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_Filter__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT_Filter__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT_Filter__SWIG_1(uint jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_RESPONSE_OFFSET_get")]
+  public static extern byte CV7ContinuousBIT_Filter_RESPONSE_OFFSET_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_GENERAL_FLAGS_get")]
+  public static extern uint CV7ContinuousBIT_Filter_GENERAL_FLAGS_get();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_flags")]
+  public static extern uint CV7ContinuousBIT_Filter_flags(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_general")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_Filter_general(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT_Filter")]
+  public static extern void delete_CV7ContinuousBIT_Filter(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT__SWIG_0")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_CV7ContinuousBIT__SWIG_1")]
+  public static extern global::System.IntPtr new_CV7ContinuousBIT__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_system")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_system(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_imu")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_imu(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_filter")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_filter(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_data")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_data(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_as_MipDataPoints")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_as_MipDataPoints(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_CV7ContinuousBIT")]
+  public static extern void delete_CV7ContinuousBIT(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_MipSharedDataFields")]
   public static extern global::System.IntPtr new_MipSharedDataFields();
 
@@ -5652,11 +6264,44 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_gpsTimestamp")]
   public static extern global::System.IntPtr MipSharedDataFields_gpsTimestamp(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_gpsTimestampValid")]
+  public static extern bool MipSharedDataFields_gpsTimestampValid(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_hasDeltaTime")]
   public static extern bool MipSharedDataFields_hasDeltaTime(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_deltaTime")]
   public static extern double MipSharedDataFields_deltaTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_hasReferenceTime")]
+  public static extern bool MipSharedDataFields_hasReferenceTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_referenceTime")]
+  public static extern ulong MipSharedDataFields_referenceTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_hasDeltaReferenceTime")]
+  public static extern bool MipSharedDataFields_hasDeltaReferenceTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_deltaReferenceTime")]
+  public static extern ulong MipSharedDataFields_deltaReferenceTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_hasExternalTimestamp")]
+  public static extern bool MipSharedDataFields_hasExternalTimestamp(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_externalTimestamp")]
+  public static extern global::System.IntPtr MipSharedDataFields_externalTimestamp(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_externalTimestampValid")]
+  public static extern bool MipSharedDataFields_externalTimestampValid(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_hasDeltaExternalTime")]
+  public static extern bool MipSharedDataFields_hasDeltaExternalTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_deltaExternalTime")]
+  public static extern ulong MipSharedDataFields_deltaExternalTime(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_deltaExternalTimeValid")]
+  public static extern bool MipSharedDataFields_deltaExternalTimeValid(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipSharedDataFields_get__SWIG_0")]
   public static extern global::System.IntPtr MipSharedDataFields_get__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
@@ -5742,14 +6387,23 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_filterSupportedChannelFields")]
   public static extern global::System.IntPtr MipNodeFeatures_filterSupportedChannelFields(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedChannelFields")]
-  public static extern global::System.IntPtr MipNodeFeatures_supportedChannelFields(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedChannelFields__SWIG_0")]
+  public static extern global::System.IntPtr MipNodeFeatures_supportedChannelFields__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedChannelFields__SWIG_1")]
+  public static extern global::System.IntPtr MipNodeFeatures_supportedChannelFields__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedSampleRates")]
   public static extern global::System.IntPtr MipNodeFeatures_supportedSampleRates(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_baseDataRate")]
+  public static extern ushort MipNodeFeatures_baseDataRate(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_gnssReceiverInfo")]
   public static extern global::System.IntPtr MipNodeFeatures_gnssReceiverInfo(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedGnssSources")]
+  public static extern global::System.IntPtr MipNodeFeatures_supportedGnssSources(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedSensorRanges__SWIG_0")]
   public static extern global::System.IntPtr MipNodeFeatures_supportedSensorRanges__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -5799,6 +6453,9 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedGpioConfigurations")]
   public static extern global::System.IntPtr MipNodeFeatures_supportedGpioConfigurations(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedGnssSignalConfigurations")]
+  public static extern global::System.IntPtr MipNodeFeatures_supportedGnssSignalConfigurations(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedDeclinationSources")]
   public static extern global::System.IntPtr MipNodeFeatures_supportedDeclinationSources(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -5819,6 +6476,9 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportsNorthCompensation")]
   public static extern bool MipNodeFeatures_supportsNorthCompensation(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNodeFeatures_supportedLowPassFilterChannelFields")]
+  public static extern global::System.IntPtr MipNodeFeatures_supportedLowPassFilterChannelFields(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipNode_doCommand__SWIG_0")]
   public static extern global::System.IntPtr MipNode_doCommand__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2, byte jarg3, global::System.Runtime.InteropServices.HandleRef jarg4, bool jarg5, bool jarg6, byte jarg7);
@@ -6198,11 +6858,11 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getConingAndScullingEnable")]
   public static extern bool InertialNode_getConingAndScullingEnable(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setAdvancedLowPassFilterSettings")]
-  public static extern void InertialNode_setAdvancedLowPassFilterSettings(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setLowPassFilterSettings")]
+  public static extern void InertialNode_setLowPassFilterSettings(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getAdvancedLowPassFilterSettings")]
-  public static extern global::System.IntPtr InertialNode_getAdvancedLowPassFilterSettings(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getLowPassFilterSettings")]
+  public static extern global::System.IntPtr InertialNode_getLowPassFilterSettings(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setComplementaryFilterSettings")]
   public static extern void InertialNode_setComplementaryFilterSettings(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
@@ -6450,6 +7110,15 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setEventTriggerConfig")]
   public static extern void InertialNode_setEventTriggerConfig(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getEventActionConfig")]
+  public static extern global::System.IntPtr InertialNode_getEventActionConfig(global::System.Runtime.InteropServices.HandleRef jarg1, byte jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setEventActionConfig__SWIG_0")]
+  public static extern void InertialNode_setEventActionConfig__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, bool jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setEventActionConfig__SWIG_1")]
+  public static extern void InertialNode_setEventActionConfig__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getAntennaLeverArmCal")]
   public static extern global::System.IntPtr InertialNode_getAntennaLeverArmCal(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -6461,6 +7130,12 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setRelativePositionReference")]
   public static extern void InertialNode_setRelativePositionReference(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getLeverArmReferenceOffset")]
+  public static extern global::System.IntPtr InertialNode_getLeverArmReferenceOffset(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setLeverArmReferenceOffset")]
+  public static extern void InertialNode_setLeverArmReferenceOffset(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_sendExternalSpeedMeasurementUpdate")]
   public static extern void InertialNode_sendExternalSpeedMeasurementUpdate(global::System.Runtime.InteropServices.HandleRef jarg1, float jarg2, float jarg3, float jarg4);
@@ -6488,6 +7163,18 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getEventTriggerStatus__SWIG_1")]
   public static extern global::System.IntPtr InertialNode_getEventTriggerStatus__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getEventActionStatus__SWIG_0")]
+  public static extern global::System.IntPtr InertialNode_getEventActionStatus__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getEventActionStatus__SWIG_1")]
+  public static extern global::System.IntPtr InertialNode_getEventActionStatus__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_getNmeaMessageFormat")]
+  public static extern global::System.IntPtr InertialNode_getNmeaMessageFormat(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_InertialNode_setNmeaMessageFormat")]
+  public static extern void InertialNode_setNmeaMessageFormat(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_DisplacementNode")]
   public static extern global::System.IntPtr new_DisplacementNode(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -8937,6 +9624,72 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_MipCommands")]
   public static extern void delete_MipCommands(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_Clear")]
+  public static extern void MipDataClasses_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_Add")]
+  public static extern void MipDataClasses_Add(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_size")]
+  public static extern uint MipDataClasses_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_capacity")]
+  public static extern uint MipDataClasses_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_reserve")]
+  public static extern void MipDataClasses_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_MipDataClasses__SWIG_0")]
+  public static extern global::System.IntPtr new_MipDataClasses__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_MipDataClasses__SWIG_1")]
+  public static extern global::System.IntPtr new_MipDataClasses__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_MipDataClasses__SWIG_2")]
+  public static extern global::System.IntPtr new_MipDataClasses__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_getitemcopy")]
+  public static extern int MipDataClasses_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_getitem")]
+  public static extern int MipDataClasses_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_setitem")]
+  public static extern void MipDataClasses_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_AddRange")]
+  public static extern void MipDataClasses_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_GetRange")]
+  public static extern global::System.IntPtr MipDataClasses_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_Insert")]
+  public static extern void MipDataClasses_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_InsertRange")]
+  public static extern void MipDataClasses_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_RemoveAt")]
+  public static extern void MipDataClasses_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_RemoveRange")]
+  public static extern void MipDataClasses_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_Repeat")]
+  public static extern global::System.IntPtr MipDataClasses_Repeat(int jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_Reverse__SWIG_0")]
+  public static extern void MipDataClasses_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_Reverse__SWIG_1")]
+  public static extern void MipDataClasses_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataClasses_SetRange")]
+  public static extern void MipDataClasses_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_MipDataClasses")]
+  public static extern void delete_MipDataClasses(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipChannelIdentifiers_Clear")]
   public static extern void MipChannelIdentifiers_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -9662,6 +10415,72 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventTriggerStatus")]
   public static extern void delete_EventTriggerStatus(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_Clear")]
+  public static extern void EventActionStatus_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_Add")]
+  public static extern void EventActionStatus_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_size")]
+  public static extern uint EventActionStatus_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_capacity")]
+  public static extern uint EventActionStatus_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_reserve")]
+  public static extern void EventActionStatus_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionStatus__SWIG_0")]
+  public static extern global::System.IntPtr new_EventActionStatus__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionStatus__SWIG_1")]
+  public static extern global::System.IntPtr new_EventActionStatus__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_EventActionStatus__SWIG_2")]
+  public static extern global::System.IntPtr new_EventActionStatus__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_getitemcopy")]
+  public static extern global::System.IntPtr EventActionStatus_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_getitem")]
+  public static extern global::System.IntPtr EventActionStatus_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_setitem")]
+  public static extern void EventActionStatus_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_AddRange")]
+  public static extern void EventActionStatus_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_GetRange")]
+  public static extern global::System.IntPtr EventActionStatus_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_Insert")]
+  public static extern void EventActionStatus_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_InsertRange")]
+  public static extern void EventActionStatus_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_RemoveAt")]
+  public static extern void EventActionStatus_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_RemoveRange")]
+  public static extern void EventActionStatus_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_Repeat")]
+  public static extern global::System.IntPtr EventActionStatus_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_Reverse__SWIG_0")]
+  public static extern void EventActionStatus_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_Reverse__SWIG_1")]
+  public static extern void EventActionStatus_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_EventActionStatus_SetRange")]
+  public static extern void EventActionStatus_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_EventActionStatus")]
+  public static extern void delete_EventActionStatus(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_ChannelGroups_Clear")]
   public static extern void ChannelGroups_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -10719,71 +11538,71 @@ class msclPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_AdaptiveFilterLevels")]
   public static extern void delete_AdaptiveFilterLevels(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_Clear")]
-  public static extern void AdvancedLowPassFilterConfig_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_Clear")]
+  public static extern void LowPassFilterConfig_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_Add")]
-  public static extern void AdvancedLowPassFilterConfig_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_Add")]
+  public static extern void LowPassFilterConfig_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_size")]
-  public static extern uint AdvancedLowPassFilterConfig_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_size")]
+  public static extern uint LowPassFilterConfig_size(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_capacity")]
-  public static extern uint AdvancedLowPassFilterConfig_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_capacity")]
+  public static extern uint LowPassFilterConfig_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_reserve")]
-  public static extern void AdvancedLowPassFilterConfig_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_reserve")]
+  public static extern void LowPassFilterConfig_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_AdvancedLowPassFilterConfig__SWIG_0")]
-  public static extern global::System.IntPtr new_AdvancedLowPassFilterConfig__SWIG_0();
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_LowPassFilterConfig__SWIG_0")]
+  public static extern global::System.IntPtr new_LowPassFilterConfig__SWIG_0();
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_AdvancedLowPassFilterConfig__SWIG_1")]
-  public static extern global::System.IntPtr new_AdvancedLowPassFilterConfig__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_LowPassFilterConfig__SWIG_1")]
+  public static extern global::System.IntPtr new_LowPassFilterConfig__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_AdvancedLowPassFilterConfig__SWIG_2")]
-  public static extern global::System.IntPtr new_AdvancedLowPassFilterConfig__SWIG_2(int jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_LowPassFilterConfig__SWIG_2")]
+  public static extern global::System.IntPtr new_LowPassFilterConfig__SWIG_2(int jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_getitemcopy")]
-  public static extern global::System.IntPtr AdvancedLowPassFilterConfig_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_getitemcopy")]
+  public static extern global::System.IntPtr LowPassFilterConfig_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_getitem")]
-  public static extern global::System.IntPtr AdvancedLowPassFilterConfig_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_getitem")]
+  public static extern global::System.IntPtr LowPassFilterConfig_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_setitem")]
-  public static extern void AdvancedLowPassFilterConfig_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_setitem")]
+  public static extern void LowPassFilterConfig_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_AddRange")]
-  public static extern void AdvancedLowPassFilterConfig_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_AddRange")]
+  public static extern void LowPassFilterConfig_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_GetRange")]
-  public static extern global::System.IntPtr AdvancedLowPassFilterConfig_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_GetRange")]
+  public static extern global::System.IntPtr LowPassFilterConfig_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_Insert")]
-  public static extern void AdvancedLowPassFilterConfig_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_Insert")]
+  public static extern void LowPassFilterConfig_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_InsertRange")]
-  public static extern void AdvancedLowPassFilterConfig_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_InsertRange")]
+  public static extern void LowPassFilterConfig_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_RemoveAt")]
-  public static extern void AdvancedLowPassFilterConfig_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_RemoveAt")]
+  public static extern void LowPassFilterConfig_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_RemoveRange")]
-  public static extern void AdvancedLowPassFilterConfig_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_RemoveRange")]
+  public static extern void LowPassFilterConfig_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_Repeat")]
-  public static extern global::System.IntPtr AdvancedLowPassFilterConfig_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_Repeat")]
+  public static extern global::System.IntPtr LowPassFilterConfig_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_Reverse__SWIG_0")]
-  public static extern void AdvancedLowPassFilterConfig_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_Reverse__SWIG_0")]
+  public static extern void LowPassFilterConfig_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_Reverse__SWIG_1")]
-  public static extern void AdvancedLowPassFilterConfig_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_Reverse__SWIG_1")]
+  public static extern void LowPassFilterConfig_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AdvancedLowPassFilterConfig_SetRange")]
-  public static extern void AdvancedLowPassFilterConfig_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_LowPassFilterConfig_SetRange")]
+  public static extern void LowPassFilterConfig_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
-  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_AdvancedLowPassFilterConfig")]
-  public static extern void delete_AdvancedLowPassFilterConfig(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_LowPassFilterConfig")]
+  public static extern void delete_LowPassFilterConfig(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_AidingMeasurementSourceOptions_Clear")]
   public static extern void AidingMeasurementSourceOptions_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -10982,6 +11801,180 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_GeographicSources")]
   public static extern void delete_GeographicSources(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_Clear")]
+  public static extern void GnssSources_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_Add")]
+  public static extern void GnssSources_Add(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_size")]
+  public static extern uint GnssSources_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_capacity")]
+  public static extern uint GnssSources_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_reserve")]
+  public static extern void GnssSources_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_GnssSources__SWIG_0")]
+  public static extern global::System.IntPtr new_GnssSources__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_GnssSources__SWIG_1")]
+  public static extern global::System.IntPtr new_GnssSources__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_GnssSources__SWIG_2")]
+  public static extern global::System.IntPtr new_GnssSources__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_getitemcopy")]
+  public static extern int GnssSources_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_getitem")]
+  public static extern int GnssSources_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_setitem")]
+  public static extern void GnssSources_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_AddRange")]
+  public static extern void GnssSources_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_GetRange")]
+  public static extern global::System.IntPtr GnssSources_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_Insert")]
+  public static extern void GnssSources_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_InsertRange")]
+  public static extern void GnssSources_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_RemoveAt")]
+  public static extern void GnssSources_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_RemoveRange")]
+  public static extern void GnssSources_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_Repeat")]
+  public static extern global::System.IntPtr GnssSources_Repeat(int jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_Reverse__SWIG_0")]
+  public static extern void GnssSources_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_Reverse__SWIG_1")]
+  public static extern void GnssSources_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSources_SetRange")]
+  public static extern void GnssSources_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_GnssSources")]
+  public static extern void delete_GnssSources(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_GnssSignalConfigOptions__SWIG_0")]
+  public static extern global::System.IntPtr new_GnssSignalConfigOptions__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_GnssSignalConfigOptions__SWIG_1")]
+  public static extern global::System.IntPtr new_GnssSignalConfigOptions__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_size")]
+  public static extern uint GnssSignalConfigOptions_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_empty")]
+  public static extern bool GnssSignalConfigOptions_empty(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_Clear")]
+  public static extern void GnssSignalConfigOptions_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_getitem")]
+  public static extern global::System.IntPtr GnssSignalConfigOptions_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_setitem")]
+  public static extern void GnssSignalConfigOptions_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_ContainsKey")]
+  public static extern bool GnssSignalConfigOptions_ContainsKey(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_Add")]
+  public static extern void GnssSignalConfigOptions_Add(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_Remove")]
+  public static extern bool GnssSignalConfigOptions_Remove(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_create_iterator_begin")]
+  public static extern global::System.IntPtr GnssSignalConfigOptions_create_iterator_begin(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_get_next_key")]
+  public static extern int GnssSignalConfigOptions_get_next_key(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.IntPtr jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GnssSignalConfigOptions_destroy_iterator")]
+  public static extern void GnssSignalConfigOptions_destroy_iterator(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.IntPtr jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_GnssSignalConfigOptions")]
+  public static extern void delete_GnssSignalConfigOptions(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_Clear")]
+  public static extern void NmeaMessageFormats_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_Add")]
+  public static extern void NmeaMessageFormats_Add(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_size")]
+  public static extern uint NmeaMessageFormats_size(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_capacity")]
+  public static extern uint NmeaMessageFormats_capacity(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_reserve")]
+  public static extern void NmeaMessageFormats_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_NmeaMessageFormats__SWIG_0")]
+  public static extern global::System.IntPtr new_NmeaMessageFormats__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_NmeaMessageFormats__SWIG_1")]
+  public static extern global::System.IntPtr new_NmeaMessageFormats__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_new_NmeaMessageFormats__SWIG_2")]
+  public static extern global::System.IntPtr new_NmeaMessageFormats__SWIG_2(int jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_getitemcopy")]
+  public static extern global::System.IntPtr NmeaMessageFormats_getitemcopy(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_getitem")]
+  public static extern global::System.IntPtr NmeaMessageFormats_getitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_setitem")]
+  public static extern void NmeaMessageFormats_setitem(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_AddRange")]
+  public static extern void NmeaMessageFormats_AddRange(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_GetRange")]
+  public static extern global::System.IntPtr NmeaMessageFormats_GetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_Insert")]
+  public static extern void NmeaMessageFormats_Insert(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_InsertRange")]
+  public static extern void NmeaMessageFormats_InsertRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_RemoveAt")]
+  public static extern void NmeaMessageFormats_RemoveAt(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_RemoveRange")]
+  public static extern void NmeaMessageFormats_RemoveRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_Repeat")]
+  public static extern global::System.IntPtr NmeaMessageFormats_Repeat(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_Reverse__SWIG_0")]
+  public static extern void NmeaMessageFormats_Reverse__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_Reverse__SWIG_1")]
+  public static extern void NmeaMessageFormats_Reverse__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, int jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_NmeaMessageFormats_SetRange")]
+  public static extern void NmeaMessageFormats_SetRange(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_delete_NmeaMessageFormats")]
+  public static extern void delete_NmeaMessageFormats(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_GpioPinModeOptions_Clear")]
   public static extern void GpioPinModeOptions_Clear(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -11414,6 +12407,33 @@ class msclPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataPoint_SWIGUpcast")]
   public static extern global::System.IntPtr MipDataPoint_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_General_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_System_General_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_Process_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_System_Process_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_System_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_System_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_General_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_IMU_General_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_Sensors_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_IMU_Sensors_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_IMU_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_IMU_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_General_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_Filter_General_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_Filter_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_Filter_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_CV7ContinuousBIT_SWIGUpcast")]
+  public static extern global::System.IntPtr CV7ContinuousBIT_SWIGUpcast(global::System.IntPtr jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("mscl", EntryPoint="CSharp_mscl_MipDataPacket_SWIGUpcast")]
   public static extern global::System.IntPtr MipDataPacket_SWIGUpcast(global::System.IntPtr jarg1);

@@ -159,6 +159,7 @@
 #include "../MicroStrain/MIP/Packets/MipDataPacket.h"
 #include "../Communication/RawBytePacket.h"
 #include "../MicroStrain/MIP/MipDataPoint.h"
+#include "../MicroStrain/MIP/MipBuiltInTest.h"
 #include "../MicroStrain/MIP/Packets/MipSharedDataFields.h"
 #include "../MicroStrain/MIP/MipNodeFeatures.h"
 #include "../MicroStrain/MIP/MipNode.h"
@@ -245,6 +246,7 @@
 %include "../MicroStrain/MIP/MipDataField.h"
 %include "../MicroStrain/MIP/Packets/MipPacket.h"
 %include "../MicroStrain/MIP/MipDataPoint.h"
+%include "../MicroStrain/MIP/MipBuiltInTest.h"
 %include "../MicroStrain/MIP/Packets/MipSharedDataFields.h"
 %include "../MicroStrain/MIP/Packets/MipDataPacket.h"
 %include "../Communication/RawBytePacket.h"
@@ -293,6 +295,7 @@ namespace std
     %template(ConfigIssues)                     vector<mscl::ConfigIssue>;
     %template(MipChannelFields)                 vector<enum mscl::MipTypes::ChannelField>;
     %template(MipCommands)                      vector<mscl::MipTypes::Command>;
+    %template(MipDataClasses)                   vector<enum mscl::MipTypes::DataClass>;
     %template(MipChannelIdentifiers)            vector<mscl::MipChannelIdentifier>;
     %template(MipCommandSet)                    vector<mscl::MipCommandBytes>;
     %template(MipFieldValues)                   vector<mscl::Value>;
@@ -306,6 +309,7 @@ namespace std
     %template(SensorRangeOptions)               map<enum mscl::SensorRange::Type, vector<mscl::SensorRange>>;
     %template(CommPortInfo)                     vector<mscl::DeviceCommPort>;
     %template(EventTriggerStatus)               vector<mscl::EventTriggerInfo>;
+    %template(EventActionStatus)                vector<mscl::EventActionInfo>;
     %template(ChannelGroups)                    vector<mscl::ChannelGroup>;
     %template(WirelessChannels)                 vector<mscl::WirelessChannel>;
     %template(DamageAngles)                     map<uint8_t, float>;
@@ -324,17 +328,19 @@ namespace std
     %template(StatusSelectors)                  vector<mscl::DeviceStatusData::StatusSelector>;
     %template(VehicleModeTypes)                 vector<mscl::InertialTypes::VehicleModeType>;
     %template(AdaptiveFilterLevels)             vector<mscl::InertialTypes::AutoAdaptiveFilteringLevel>;
-    %template(AdvancedLowPassFilterConfig)      vector<mscl::AdvancedLowPassFilterData>;
+    %template(LowPassFilterConfig)              vector<mscl::LowPassFilterData>;
     %template(AidingMeasurementSourceOptions)   vector<mscl::InertialTypes::AidingMeasurementSource>;
     %template(PpsSourceOptions)                 vector<mscl::InertialTypes::PpsSource>;
     %template(GeographicSources)                vector<mscl::InertialTypes::GeographicSourceOption>;
+    %template(GnssSources)                      vector<mscl::InertialTypes::GNSS_Source>;
+    %template(GnssSignalConfigOptions)          map<mscl::MipChannelIdentifier::GnssConstellationIds, std::vector<uint8_t>>;
+    %template(NmeaMessageFormats)               vector<mscl::NmeaMessageFormat>;
     %template(GpioPinModeOptions)               vector<mscl::GpioConfiguration::PinModes>;
     %template(GpioBehaviorModes)                map<uint8_t, vector<mscl::GpioConfiguration::PinModes>>;
     %template(GpioFeatureBehaviors)             map<enum mscl::GpioConfiguration::Feature, map<uint8_t, vector<mscl::GpioConfiguration::PinModes>>>;
     %template(GpioPinOptions)                   map<uint8_t, map<enum mscl::GpioConfiguration::Feature, map<uint8_t, vector<mscl::GpioConfiguration::PinModes>>>>;
     %template(EventInputTriggers)               array<uint8_t, mscl::EventTriggerCombinationParameter::MAX_INPUT_TRIGGERS>;
     %template(EventTypes)                       vector<mscl::EventTypeInfo>;
-
 
 
 #ifndef UNIX_BUILD

@@ -24,39 +24,60 @@ namespace mscl
         MipNodeFeatures(const MipNodeFeatures&);                //disabled copy constructor
         MipNodeFeatures& operator=(const MipNodeFeatures&);    //disable assignment operator
 
+        //Variable: m_nodeInfo
+        //    The <MipNodeInfo> object that gives access to information of the Node
+        mutable std::unique_ptr<MipNodeInfo> m_nodeInfo;
+
     public:
         virtual ~MipNodeFeatures() {};
 
     protected:
+        friend class MipNode_Impl;
+
         //Constructor: MipNodeFeatures
         //    Creates a MipNodeFeatures object.
         //
         //Parameters:
-        //    info - An <MipNodeInfo> object representing standard information of a Mip Node.
-        MipNodeFeatures(const MipNodeInfo& info);
+        //    node - An <MipNode_Impl> object that this is a member of (used for lazy loading).
+        MipNodeFeatures(const MipNode_Impl* node);
 
-        //Variable: m_nodeInfo
-        //    The <MipNodeInfo>.
-        MipNodeInfo m_nodeInfo;
+        //Variable: m_node
+        //  The <MipNode_Impl> to use for lazy loading of values.
+        const MipNode_Impl* m_node;
 
-    public:
+        //Function: nodeInfo
+        //    Gets the basic device info (serial, model, fw version, etc.).
+        //
+        //Returns:
+        //    A <MipNodeInfo> object containing the basic device info.
+        //
+        //Exceptions:
+        //    - <Error_MipCmdFailed>: The command has failed.
+        //    - <Error_Communication>: Timed out waiting for a response.
+        //    - <Error_Connection>: A connection error has occurred with the Node.
+        const MipNodeInfo& nodeInfo() const;
+
+        //Function: resetNodeInfo
+        //  Clears cached info read from device (ie fw version, receiver info, etc.).
+        void resetNodeInfo();
+
 #ifndef SWIG
         //Function: create
-        //    Builds and returns a MipNodeFeatures pointer based on the given parameters.
+        //    Builds and returns a MipNodeFeatures pointer.
         //
         //Parameters:
-        //    info - An <MipNodeInfo> object representing standard information of the device.
+        //    node - An <MipNode_Impl> object that this is a member of (used for lazy loading).
         //
         //Returns:
         //    A MipNodeFeatures unique_ptr.
         //
         //Exceptions:
         //    - <Error_NotSupported>: The Node model is not supported by MSCL.
-        static std::unique_ptr<MipNodeFeatures> create(const MipNodeInfo& info);
+        static std::unique_ptr<MipNodeFeatures> create(const MipNode_Impl* node);
 #endif
 
     public:
-        //Function: isChannelField
+        //API Function: isChannelField
         //  Checks if the uint16 descriptor value is a Channel field or not.
         //
         //Returns:
@@ -111,7 +132,7 @@ namespace mscl
         //    Gets a list of the supported channel fields for a given <MipTypes::DataClass>.
         //
         //Parameters:
-        //    dataClass - The <MipTypes::DataClass> to get the list of supported channels for.
+        //    dataClass - default -1 - The <MipTypes::DataClass> to get the list of supported channels for. If -1, all supported ChannelFields will be returned regardless of DataClass
         //
         //Returns:
         //    A <MipTypes::ChannelFields> object containing the list of supported channel fields.
@@ -121,7 +142,7 @@ namespace mscl
         //    - <Error_Communication>: Timed out waiting for a response.
         //    - <Error_NotSupported>: The <MipTypes::DataClass> is not supported by this node.
         //    - <Error_Connection>: A connection error has occurred with the Node.
-        MipTypes::MipChannelFields supportedChannelFields(MipTypes::DataClass dataClass) const;
+        MipTypes::MipChannelFields supportedChannelFields(MipTypes::DataClass dataClass = MipTypes::DataClass(-1)) const;
 
         //API Function: supportedSampleRates
         //    Gets a list of the supported sample rates for a given <MipTypes::DataClass>.
@@ -139,6 +160,22 @@ namespace mscl
         //    - <Error_Connection>: A connection error has occurred with the Node.
         const SampleRates& supportedSampleRates(MipTypes::DataClass dataClass) const;
 
+        //API Function: baseDataRate
+        //    Gets the base data rate for a given <MipTypes::DataClass>.
+        //
+        //Parameters:
+        //    dataClass - The <MipTypes::DataClass> to get base data rate for.
+        //
+        //Returns:
+        //    uint16 - the base data rate.
+        //
+        //Exceptions:
+        //    - <Error_MipCmdFailed>: The command has failed.
+        //    - <Error_Communication>: Timed out waiting for a response.
+        //    - <Error_NotSupported>: The <MipTypes::DataClass> is not supported by this node.
+        //    - <Error_Connection>: A connection error has occurred with the Node.
+        const uint16& baseDataRate(MipTypes::DataClass dataClass) const;
+
         //API Function: gnssReceiverInfo
         //    Gets a list of <GnssReceiverInfo> for supported GNSS receivers.
         //
@@ -150,6 +187,18 @@ namespace mscl
         //    - <Error_Communication>: Timed out waiting for a response.
         //    - <Error_Connection>: A connection error has occurred with the Node.
         const GnssReceivers& gnssReceiverInfo() const;
+
+        //API Function: supportedGnssSources
+        //    Gets a list of <InertialTypes::GNSS_Source> for supported GNSS sources.
+        //
+        //Returns:
+        //    A <GnssSources> list containing <InertialTypes::GNSS_Source> for supported sources
+        //
+        //Exceptions:
+        //    - <Error_MipCmdFailed>: The command has failed.
+        //    - <Error_Communication>: Timed out waiting for a response.
+        //    - <Error_Connection>: A connection error has occurred with the Node.
+        const GnssSources supportedGnssSources() const;
 
         //API Function: supportedSensorRanges
         //    Gets the <SupportedSensorRanges> for each configurable sensor type.
@@ -286,6 +335,13 @@ namespace mscl
         //    A <GpioPinOptions> map of supported GPIO pin configurations
         const GpioPinOptions supportedGpioConfigurations() const;
 
+        //API Function: supportedGnssSignalConfigurations
+        //    Gets bitmask vectors of supported <GnssSignalConfiguration> for each constellation
+        //
+        //Returns:
+        //    Bitmask vectors of supported <GnssSignalConfiguration> for each constellation
+        GnssSignalConfigOptions supportedGnssSignalConfigurations() const;
+
         //API Function: supportedDeclinationOptions
         //    Gets a vector of supported declination source options
         //
@@ -335,5 +391,12 @@ namespace mscl
         //Returns:
         //    True if north compensation is supported by the Node, false otherwise.
         const bool supportsNorthCompensation() const;
+
+        //API Function: supportedLowPassFilterChannelFields
+        //    Gets the list of <MipTypes::ChannelFields> that the low-pass filter can be applied to for this device.
+        //
+        //Returns:
+        //    <MipTypes::MipChannelFields> - list of supported <MipTypes::ChannelFields>.
+        MipTypes::MipChannelFields supportedLowPassFilterChannelFields() const;
     };
 }
