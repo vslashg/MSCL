@@ -31,18 +31,6 @@ namespace mscl
         return m_impl->totalPackets();
     }
 
-    NmeaPackets InertialNode::getNmeaPackets(uint32 timeout, uint32 maxPackets)
-    {
-        NmeaPackets packets;
-        m_impl->getNmeaPackets(packets, timeout, maxPackets);
-        return packets;
-    }
-
-    void InertialNode::enableNmeaParsing(bool enable)
-    {
-        m_impl->enableNmeaParsing(enable);
-    }
-
     void InertialNode::pollData(MipTypes::DataClass dataClass, const MipTypes::MipChannelFields& fields /*= MipTypes::MipChannelFields()*/)
     {
         m_impl->pollData(dataClass, fields);
@@ -903,12 +891,7 @@ namespace mscl
     {
         MipFieldValues data = m_impl->get(MipTypes::CMD_GPIO_CONFIGURATION, {
             Value::UINT8(pin) });
-        GpioConfiguration config;
-        config.pin = data[0].as_uint8();
-        config.feature = static_cast<GpioConfiguration::Feature>(data[1].as_uint8());
-        config.behavior = data[2].as_uint8();
-        config.pinModeValue(data[3].as_uint8());
-        return config;
+        return GpioConfiguration::fromCommandResponse(data);
     }
 
     void InertialNode::setGpioConfig(GpioConfiguration config)

@@ -10,7 +10,7 @@
 
 namespace mscl {
 
-public class CV7ContinuousBIT_System_General : Bitfield {
+public class CV7ContinuousBIT_System_General : ContinuousBIT_System_General {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
 
   internal CV7ContinuousBIT_System_General(global::System.IntPtr cPtr, bool cMemoryOwn) : base(msclPINVOKE.CV7ContinuousBIT_System_General_SWIGUpcast(cPtr), cMemoryOwn) {
@@ -42,47 +42,6 @@ public class CV7ContinuousBIT_System_General : Bitfield {
     if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
   }
 
-  public byte flags() {
-    byte ret = msclPINVOKE.CV7ContinuousBIT_System_General_flags(swigCPtr);
-    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public bool systemClockFailure() {
-    bool ret = msclPINVOKE.CV7ContinuousBIT_System_General_systemClockFailure(swigCPtr);
-    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public bool powerFault() {
-    bool ret = msclPINVOKE.CV7ContinuousBIT_System_General_powerFault(swigCPtr);
-    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public bool firmwareFault() {
-    bool ret = msclPINVOKE.CV7ContinuousBIT_System_General_firmwareFault(swigCPtr);
-    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public bool timingOverload() {
-    bool ret = msclPINVOKE.CV7ContinuousBIT_System_General_timingOverload(swigCPtr);
-    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public bool bufferOverrun() {
-    bool ret = msclPINVOKE.CV7ContinuousBIT_System_General_bufferOverrun(swigCPtr);
-    if (msclPINVOKE.SWIGPendingException.Pending) throw msclPINVOKE.SWIGPendingException.Retrieve();
-    return ret;
-  }
-
-  public static readonly byte SYSTEM_CLOCK_FAILURE = msclPINVOKE.CV7ContinuousBIT_System_General_SYSTEM_CLOCK_FAILURE_get();
-  public static readonly byte POWER_FAULT = msclPINVOKE.CV7ContinuousBIT_System_General_POWER_FAULT_get();
-  public static readonly byte FIRMWARE_FAULT = msclPINVOKE.CV7ContinuousBIT_System_General_FIRMWARE_FAULT_get();
-  public static readonly byte TIMING_OVERLOAD = msclPINVOKE.CV7ContinuousBIT_System_General_TIMING_OVERLOAD_get();
-  public static readonly byte BUFFER_OVERRUN = msclPINVOKE.CV7ContinuousBIT_System_General_BUFFER_OVERRUN_get();
 }
 
 }

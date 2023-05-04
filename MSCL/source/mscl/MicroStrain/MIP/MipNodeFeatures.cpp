@@ -267,7 +267,7 @@ namespace mscl
         MipModel model(nodeInfo().deviceInfo().modelNumber);
         switch (model.baseModel().nodeModel())
         {
-        
+
         case MipModels::node_3dm_gx3_45:
             return{
                 InertialTypes::VehicleModeType::PORTABLE_VEHICLE,
@@ -530,7 +530,7 @@ namespace mscl
             case MipModels::node_3dm_dh3:
                 return {
                     InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_DISABLE,
-                    InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_ENABLE_FIXED 
+                    InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_ENABLE_FIXED
                 };
 
             case MipModels::node_3dm_gx5_45:
@@ -547,7 +547,7 @@ namespace mscl
             default:
                 return {
                     InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_DISABLE,
-                    InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_ENABLE_FIXED, 
+                    InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_ENABLE_FIXED,
                     InertialTypes::AdaptiveMeasurementMode::ADAPTIVE_MEASUREMENT_ENABLE_AUTO
                 };
         }
@@ -573,6 +573,10 @@ namespace mscl
         case MipModels::node_3dm_gq7:
         case MipModels::node_3dm_cv7_ahrs:
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+        case MipModels::node_3dm_cv7_ins:
         default:
             return{
                 InertialTypes::AutoAdaptiveFilteringLevel::FILTERING_OFF,
@@ -595,12 +599,16 @@ namespace mscl
         switch(model.baseModel().nodeModel())
         {
             case MipModels::node_3dm_cv7_ahrs:
+            case MipModels::node_3dm_gv7_ahrs:
+            case MipModels::node_3dm_gv7_ins:
+            case MipModels::node_3dm_cv7_ins:
                 return{
                     InertialTypes::AidingMeasurementSource::MAGNETOMETER_AIDING,
                     InertialTypes::AidingMeasurementSource::EXTERNAL_HEADING_AIDING
                 };
 
             case MipModels::node_3dm_cv7_ar:
+            case MipModels::node_3dm_gv7_ar:
                 return {
                     InertialTypes::AidingMeasurementSource::EXTERNAL_HEADING_AIDING
                 };
@@ -629,6 +637,10 @@ namespace mscl
         {
         case MipModels::node_3dm_cv7_ahrs:
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+        case MipModels::node_3dm_cv7_ins:
             return{
                 InertialTypes::PpsSource::PPS_DISABLED,
                 InertialTypes::PpsSource::PPS_GPIO,
@@ -667,9 +679,9 @@ namespace mscl
             && (behavior == GpioConfiguration::GpioBehavior::GPIO_OUTPUT_LOW_BEHAVIOR || behavior == GpioConfiguration::GpioBehavior::GPIO_OUTPUT_HIGH_BEHAVIOR))
         {
             return{
-            GpioConfiguration::PinModes(0),
-            GpioConfiguration::PinModes::OPEN_DRAIN,
-            GpioConfiguration::PinModes(GpioConfiguration::PinModes::OPEN_DRAIN | GpioConfiguration::PinModes::PULLUP)
+                GpioConfiguration::PinModes(0),
+                GpioConfiguration::PinModes::OPEN_DRAIN,
+                GpioConfiguration::PinModes(GpioConfiguration::PinModes::OPEN_DRAIN | GpioConfiguration::PinModes::PULLUP)
             };
         }
 
@@ -680,6 +692,29 @@ namespace mscl
                 GpioConfiguration::PinModes::PULLUP,
                 GpioConfiguration::PinModes::PULLDOWN
             };
+        }
+
+        if (feature == GpioConfiguration::UART_FEATURE)
+        {
+            switch (behavior)
+            {
+            case GpioConfiguration::UartBehavior::UART_TRANSMIT:
+                return{
+                    GpioConfiguration::PinModes(0),
+                    GpioConfiguration::PinModes::OPEN_DRAIN,
+                    GpioConfiguration::PinModes(GpioConfiguration::PinModes::OPEN_DRAIN | GpioConfiguration::PinModes::PULLUP)
+                };
+
+            case GpioConfiguration::UartBehavior::UART_RECEIVE:
+                return{
+                    GpioConfiguration::PinModes(0),
+                    GpioConfiguration::PinModes::PULLUP,
+                    GpioConfiguration::PinModes::PULLDOWN
+                };
+
+            default:
+                break;
+            }
         }
 
         return{ GpioPinModeOptions(0) };
@@ -696,9 +731,9 @@ namespace mscl
         {
         case GpioConfiguration::Feature::GPIO_FEATURE:
             return{
-            { GpioConfiguration::GpioBehavior::GPIO_INPUT_BEHAVIOR, supportedGpioPinModes(GpioConfiguration::GPIO_FEATURE, GpioConfiguration::GpioBehavior::GPIO_INPUT_BEHAVIOR) },
-            { GpioConfiguration::GpioBehavior::GPIO_OUTPUT_LOW_BEHAVIOR, supportedGpioPinModes(GpioConfiguration::GPIO_FEATURE, GpioConfiguration::GpioBehavior::GPIO_OUTPUT_LOW_BEHAVIOR) },
-            { GpioConfiguration::GpioBehavior::GPIO_OUTPUT_HIGH_BEHAVIOR, supportedGpioPinModes(GpioConfiguration::GPIO_FEATURE, GpioConfiguration::GpioBehavior::GPIO_OUTPUT_HIGH_BEHAVIOR) }
+            { GpioConfiguration::GpioBehavior::GPIO_INPUT_BEHAVIOR, supportedGpioPinModes(feature, GpioConfiguration::GpioBehavior::GPIO_INPUT_BEHAVIOR) },
+            { GpioConfiguration::GpioBehavior::GPIO_OUTPUT_LOW_BEHAVIOR, supportedGpioPinModes(feature, GpioConfiguration::GpioBehavior::GPIO_OUTPUT_LOW_BEHAVIOR) },
+            { GpioConfiguration::GpioBehavior::GPIO_OUTPUT_HIGH_BEHAVIOR, supportedGpioPinModes(feature, GpioConfiguration::GpioBehavior::GPIO_OUTPUT_HIGH_BEHAVIOR) }
             };
 
         case GpioConfiguration::Feature::PPS_FEATURE:
@@ -709,16 +744,36 @@ namespace mscl
 
         case GpioConfiguration::Feature::ENCODER_FEATURE:
             return{
-                { GpioConfiguration::EncoderBehavior::ENCODER_A, supportedGpioPinModes(GpioConfiguration::ENCODER_FEATURE, GpioConfiguration::EncoderBehavior::ENCODER_A) },
-                { GpioConfiguration::EncoderBehavior::ENCODER_B, supportedGpioPinModes(GpioConfiguration::ENCODER_FEATURE, GpioConfiguration::EncoderBehavior::ENCODER_A) }
+                { GpioConfiguration::EncoderBehavior::ENCODER_A, supportedGpioPinModes(feature, GpioConfiguration::EncoderBehavior::ENCODER_A) },
+                { GpioConfiguration::EncoderBehavior::ENCODER_B, supportedGpioPinModes(feature, GpioConfiguration::EncoderBehavior::ENCODER_A) }
             };
 
         case GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE:
             return{
-                { GpioConfiguration::EventTimestampBehavior::EVENT_TIMESTAMP_RISING, supportedGpioPinModes(GpioConfiguration::EVENT_TIMESTAMP_FEATURE, 0) },
-                { GpioConfiguration::EventTimestampBehavior::EVENT_TIMESTAMP_FALLING, supportedGpioPinModes(GpioConfiguration::EVENT_TIMESTAMP_FEATURE, 0) },
-                { GpioConfiguration::EventTimestampBehavior::EVENT_TIMESTAMP_EDGE, supportedGpioPinModes(GpioConfiguration::EVENT_TIMESTAMP_FEATURE, 0) }
+                { GpioConfiguration::EventTimestampBehavior::EVENT_TIMESTAMP_RISING, supportedGpioPinModes(feature, 0) },
+                { GpioConfiguration::EventTimestampBehavior::EVENT_TIMESTAMP_FALLING, supportedGpioPinModes(feature, 0) },
+                { GpioConfiguration::EventTimestampBehavior::EVENT_TIMESTAMP_EDGE, supportedGpioPinModes(feature, 0) }
             };
+
+        case GpioConfiguration::Feature::UART_FEATURE:
+        {
+            MipModel model(nodeInfo().deviceInfo().modelNumber);
+            switch (model.baseModel().nodeModel())
+            {
+            case MipModels::node_3dm_gv7_ins:
+            case MipModels::node_3dm_cv7_ins:
+                // technically Transmit is also supported, but the device won't actually output anything so no reason to configure it
+                return{
+                    { GpioConfiguration::UartBehavior::UART_RECEIVE, supportedGpioPinModes(feature, GpioConfiguration::UartBehavior::UART_RECEIVE) }
+                };
+
+            default:
+                return{
+                    { GpioConfiguration::UartBehavior::UART_TRANSMIT, supportedGpioPinModes(feature, GpioConfiguration::UartBehavior::UART_TRANSMIT) },
+                    { GpioConfiguration::UartBehavior::UART_RECEIVE, supportedGpioPinModes(feature, GpioConfiguration::UartBehavior::UART_RECEIVE) }
+                };
+            }
+        }
 
         default:
             return{};
@@ -733,7 +788,7 @@ namespace mscl
         }
 
         GpioPinOptions options = supportedGpioConfigurations();
-        
+
         if (options.find(pin) == options.end())
         {
             return{};
@@ -749,60 +804,87 @@ namespace mscl
             return{};
         }
 
-        GpioFeatureBehaviors pin1Features = {
-            { GpioConfiguration::Feature::UNUSED_FEATURE, {} },
-            { GpioConfiguration::Feature::GPIO_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::GPIO_FEATURE) },
-        };
+        const MipModel model(nodeInfo().deviceInfo().modelNumber);
+        const MipModels::NodeModel nodeModel = model.baseModel().nodeModel();
 
-        GpioFeatureBehaviors pin2Features = {
-            { GpioConfiguration::Feature::UNUSED_FEATURE, {} },
-            { GpioConfiguration::Feature::GPIO_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::GPIO_FEATURE) },
-        };
-
-        GpioFeatureBehaviors pin3Features = {
-            { GpioConfiguration::Feature::UNUSED_FEATURE, {} },
-            { GpioConfiguration::Feature::GPIO_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::GPIO_FEATURE) },
-        };
-
-        GpioFeatureBehaviors pin4Features = {
-            { GpioConfiguration::Feature::UNUSED_FEATURE, {} },
-            { GpioConfiguration::Feature::GPIO_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::GPIO_FEATURE) },
-        };
-
-        MipModel model(nodeInfo().deviceInfo().modelNumber);
-        switch (model.baseModel().nodeModel())
+        // get supported pin IDs
+        std::vector<uint8> supportedPins;
+        switch (nodeModel)
         {
-        case MipModels::node_3dm_cv7_ahrs:
-        case MipModels::node_3dm_cv7_ar:
-            pin1Features.emplace(GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE));
-            pin2Features.emplace(GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE));
-            pin3Features.emplace(GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE));
-            pin4Features.emplace(GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE));
-
-            pin1Features.emplace(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE));
-            pin2Features.emplace(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE));
-            pin3Features.emplace(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE));
-            pin4Features.emplace(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE));
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+            supportedPins = { 1, 2 };
             break;
 
-        case MipModels::node_3dm_gq7:
-            pin1Features.emplace(GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE));
-            pin3Features.emplace(GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE));
-
-            pin1Features.emplace(GpioConfiguration::Feature::ENCODER_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::ENCODER_FEATURE));
-            pin2Features.emplace(GpioConfiguration::Feature::ENCODER_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::ENCODER_FEATURE));
-            break;
-
+        // gq7, cv7
         default:
+            supportedPins = { 1, 2, 3, 4 };
             break;
         }
 
-        return{
-            { 1, pin1Features },
-            { 2, pin2Features },
-            { 3, pin3Features },
-            { 4, pin4Features }
+        // get all available to avoid re-calling supportedGpioBehaviors() for a behavior type
+        const GpioFeatureBehaviors availableBehaviors = {
+                { GpioConfiguration::Feature::GPIO_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::GPIO_FEATURE) },
+                { GpioConfiguration::Feature::PPS_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::PPS_FEATURE) },
+                { GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE) },
+                { GpioConfiguration::Feature::ENCODER_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::ENCODER_FEATURE) },
+                { GpioConfiguration::Feature::UART_FEATURE, supportedGpioBehaviors(GpioConfiguration::Feature::UART_FEATURE) }
         };
+        
+        // build pin options
+        GpioPinOptions pinOptions;
+        for (uint8 pinId : supportedPins)
+        {
+            // add features shared for all pins across all devices
+            GpioFeatureBehaviors features = {
+                { GpioConfiguration::Feature::UNUSED_FEATURE,{} },
+                { GpioConfiguration::Feature::GPIO_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::GPIO_FEATURE) }
+            };
+
+            // add device- and pin-specific features
+            switch (nodeModel)
+            {
+            case MipModels::node_3dm_cv7_ahrs:
+            case MipModels::node_3dm_cv7_ar:
+            case MipModels::node_3dm_gv7_ahrs:
+            case MipModels::node_3dm_gv7_ar:
+            case MipModels::node_3dm_gv7_ins:
+            case MipModels::node_3dm_cv7_ins:
+                // CV7 and GV7 all pins support the same features (PPS, Event Timestamp)
+                features.emplace(GpioConfiguration::Feature::PPS_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::PPS_FEATURE));
+                features.emplace(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::EVENT_TIMESTAMP_FEATURE));
+                features.emplace(GpioConfiguration::Feature::UART_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::UART_FEATURE));
+                break;
+
+            case MipModels::node_3dm_gq7:
+                // GQ7 feature support varies across pins
+                switch (pinId)
+                {
+                case 1:
+                    features.emplace(GpioConfiguration::Feature::PPS_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::PPS_FEATURE));
+                    features.emplace(GpioConfiguration::Feature::ENCODER_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::ENCODER_FEATURE));
+                    break;
+                case 2:
+                    features.emplace(GpioConfiguration::Feature::ENCODER_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::ENCODER_FEATURE));
+                    break;
+                case 3:
+                    features.emplace(GpioConfiguration::Feature::PPS_FEATURE, availableBehaviors.at(GpioConfiguration::Feature::PPS_FEATURE));
+                    break;
+                default:
+                    break;
+                }
+                break;
+
+            default:
+                break;
+            }
+            
+            // add features for target id to pin options
+            pinOptions.emplace(pinId, features);
+        }
+
+        return pinOptions;
     }
 
     GnssSignalConfigOptions MipNodeFeatures::supportedGnssSignalConfigurations() const
@@ -865,6 +947,10 @@ namespace mscl
         {
         case MipModels::node_3dm_cv7_ahrs:
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+        case MipModels::node_3dm_cv7_ins:
             return{
                 InertialTypes::GeographicSourceOption::NONE,
                 InertialTypes::GeographicSourceOption::MANUAL
@@ -892,6 +978,10 @@ namespace mscl
         {
         case MipModels::node_3dm_cv7_ahrs:
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+        case MipModels::node_3dm_cv7_ins:
             return{
                 InertialTypes::GeographicSourceOption::NONE,
                 InertialTypes::GeographicSourceOption::MANUAL
@@ -919,6 +1009,10 @@ namespace mscl
         {
         case MipModels::node_3dm_cv7_ahrs:
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+        case MipModels::node_3dm_cv7_ins:
             return{
                 InertialTypes::GeographicSourceOption::NONE,
                 InertialTypes::GeographicSourceOption::MANUAL
@@ -954,6 +1048,10 @@ namespace mscl
         {
         case MipModels::node_3dm_cv7_ahrs:
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ahrs:
+        case MipModels::node_3dm_gv7_ar:
+        case MipModels::node_3dm_gv7_ins:
+        case MipModels::node_3dm_cv7_ins:
         default:
             possibleFields = {
                 // 0x80: Sensor Data
@@ -1071,6 +1169,7 @@ namespace mscl
         case MipModels::node_3dm_cl5_15:
 
         case MipModels::node_3dm_cv7_ar:
+        case MipModels::node_3dm_gv7_ar:
             return false;
 
         default:

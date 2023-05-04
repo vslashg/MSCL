@@ -14,17 +14,17 @@ namespace mscl
     //////////  NmeaMessageFormat  //////////
     const SampleRate NmeaMessageFormat::MAX_FREQUENCY = SampleRate::Hertz(10);
 
-    void NmeaMessageFormat::sentenceType(NmeaMessageFormat::SentenceType type)
+    void NmeaMessageFormat::sentenceType(const NmeaMessageFormat::SentenceType type)
     {
         m_sentenceType = type;
     }
 
-    void NmeaMessageFormat::talkerId(NmeaMessageFormat::Talker id)
+    void NmeaMessageFormat::talkerId(const NmeaMessageFormat::Talker id)
     {
         m_talkerId = id;
     }
 
-    void NmeaMessageFormat::sourceDataClass(MipTypes::DataClass dataClass, uint16 baseRate)
+    void NmeaMessageFormat::sourceDataClass(const MipTypes::DataClass dataClass, const uint16 baseRate)
     {
         m_sourceDescSet = dataClass;
         updateDecimation(baseRate);
@@ -35,7 +35,7 @@ namespace mscl
         return SampleRate::FromInertialRateDecimationInfo(m_baseRate, m_decimation);
     }
 
-    void NmeaMessageFormat::sampleRate(SampleRate rate, uint16 baseRate)
+    void NmeaMessageFormat::sampleRate(const SampleRate rate, const uint16 baseRate)
     {
         m_baseRate = baseRate == 0 ? m_baseRate : baseRate;
 
@@ -62,7 +62,7 @@ namespace mscl
         m_decimation = actualRate.toDecimation(m_baseRate);
     }
 
-    void NmeaMessageFormat::updateDecimation(uint16 newBaseRate)
+    void NmeaMessageFormat::updateDecimation(const uint16 newBaseRate)
     {
         // calculate sample rate based on current values
         const SampleRate currentRate = SampleRate::FromInertialRateDecimationInfo(m_baseRate, m_decimation);
@@ -72,7 +72,7 @@ namespace mscl
         sampleRate(currentRate);
     }
 
-    bool NmeaMessageFormat::talkerIdRequired(SentenceType sentenceType)
+    bool NmeaMessageFormat::talkerIdRequired(const SentenceType sentenceType)
     {
         switch (sentenceType)
         {
@@ -86,13 +86,13 @@ namespace mscl
         }
     }
 
-    bool NmeaMessageFormat::dataClassSupported(MipTypes::DataClass dataClass, NmeaMessageFormat::SentenceType sentenceType)
+    bool NmeaMessageFormat::dataClassSupported(const MipTypes::DataClass dataClass, const NmeaMessageFormat::SentenceType sentenceType)
     {
         std::vector<MipTypes::DataClass> supported = NmeaMessageFormat::supportedDataClasses(sentenceType);
         return std::find(supported.begin(), supported.end(), dataClass) != supported.end();
     }
 
-    std::vector<MipTypes::DataClass> NmeaMessageFormat::supportedDataClasses(NmeaMessageFormat::SentenceType sentenceType)
+    MipTypes::MipDataClasses NmeaMessageFormat::supportedDataClasses(const NmeaMessageFormat::SentenceType sentenceType)
     {
         switch (sentenceType)
         {
@@ -134,7 +134,7 @@ namespace mscl
         }
     }
 
-    NmeaMessageFormats NmeaMessageFormat::fromCommandResponse(const MipFieldValues& responseValues, uint8 startIndex)
+    NmeaMessageFormats NmeaMessageFormat::fromCommandResponse(const MipFieldValues& responseValues, const uint8 startIndex)
     {
         const uint8 count = responseValues[startIndex].as_uint8();
         const uint8 ELEMENTS_PER_FORMAT = 4;
@@ -1132,6 +1132,28 @@ namespace mscl
 
         float mPerRev = radius * 2 * boost::math::constants::pi<float>();
         m_scaling = resolution / mPerRev;
+    }
+
+    GpioConfiguration GpioConfiguration::fromCommandResponse(const MipFieldValues& responseValues, uint8 startIndex)
+    {
+        GpioConfiguration config;
+        config.pin = responseValues[startIndex].as_uint8();
+        config.feature = static_cast<GpioConfiguration::Feature>(responseValues[startIndex + 1].as_uint8());
+        config.behavior = responseValues[startIndex + 2].as_uint8();
+        config.pinModeValue(responseValues[startIndex + 3].as_uint8());
+
+        // for UART feature the behavior is formatted:
+        //  - first four bits is port # (0 can be used when setting to indicate default)
+        //  - second four bits is behavior
+        // so 0x21 is transmit over port 2
+        // current devices only support one port per pin so we don't need to worry about the port number
+        // strip it from the value for simplicity
+        if (config.feature == UART_FEATURE)
+        {
+            config.behavior = config.behavior & 0x0F;
+        }
+
+        return config;
     }
 
     void EventTriggerThresholdParameter::channel(const MipTypes::ChannelField channelField,
